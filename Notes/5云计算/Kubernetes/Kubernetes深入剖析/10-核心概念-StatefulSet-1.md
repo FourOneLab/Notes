@@ -27,7 +27,7 @@ kubernetes得益于“控制器模式”，在Deployment的基础上扩展出Sta
 2. 以Service 的DNS方式：比如通过my-svc.my-namespace.svc.cluster.local这条DNS可以访问到名为my-svc的Service所代理的某个Pod。++通过DNS具体可以分为两种方式++：
     1. Normal Service，访问my-svc.my-namespace.svc.cluster.local，解析到my-svc这个Service的VIP，然后与访问VIP的方式一样。
     2. Headless Service，访问my-svc.my-namespace.svc.cluster.local，解析到的直接就是my-svc代理的某个pod的IP地址。
-    
+
 **区别在于，Headless Servcice不需要分配VIP，可以直接以DNS记录的方式解析出被代理Pod的IP地址。**
 
 ### Headless Service 的例子
@@ -133,7 +133,7 @@ web-1
 以DNS的方式访问Headless Service：
 
 ```
-$ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh 
+$ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh
 ```
 在启动的Pod的容器中，使用nslookup命令来解析Pod对应的Headlesss Service：
 
@@ -168,6 +168,3 @@ Address 1: 10.244.2.7
 
 
 StatefulSet其实是Deployment的改良。通过Headless Service的方式，StatefulSet为每个Pod创建了一个固定并且稳定的DNS记录，来作为它的访问入口。
-
-
-

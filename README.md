@@ -112,34 +112,101 @@
 - [大数据概述](Notes/4大数据/大数据概述.md)
 
 ## 数据库
-
-## 分布式原理
+- [5大数据库种类](Notes/4大数据/Database/5大数据库种类.md)
+- [数据字典](Notes/4大数据/Database/数据字典.md)
 
 ## Elastic Search
+- [fscrawler使用指南](Notes/4大数据/Elastic-Search/插件fscrawler使用指南.md)
 
 ## Kafka
+- [Kafka Consumer](Notes/4大数据/Kafka/Kafka-Consumer.md)
+- [Kafka Manager](Notes/4大数据/Kafka/Kafka-Manager.md)
+- [Kafka Tool](Notes/4大数据/Kafka/Kafka-Tool.md)
+- [Kafka不只是消息系统](Notes/4大数据/Kafka/Kafka不只是消息系统.md)
+- [Kafka 常用命令](Notes/4大数据/Kafka/Kafka常用命令.md)
+- [Kafka 核心原理](Notes/4大数据/Kafka/Kafka核心原理.md)
+- [Kafka 简介](Notes/4大数据/Kafka/Kafka简介.md)
+- [Kafka 配置文件](Notes/4大数据/Kafka/Kafka配置文件.md)
+- [Java编写Kafka](Notes/4大数据/Kafka/使用Java编写Kafka.md)
+- [安全模式下的Kafka](Notes/4大数据/Kafka/安全模式下的Kafka.md)
 
 ## Log
+- [日志采集](Notes/4大数据/Log/日志采集.md)
 
-## 消息队列
 
 ## Spark
+- [Spark core](Notes/4大数据/Spark/Spark-core.md)
+- [Spark SQL](Notes/4大数据/Spark/Spark-SQL.md)
+- [Spark Streaming 消费Kafka数据](Notes/4大数据/Spark/Spark-Streaming消费Kafka数据.md)
 
 ## Zookeeper
+- [PAXOS](Notes/4大数据/Zookeeper/PAXOS.md)
+- [Zookeeper API](Notes/4大数据/Zookeeper/Zookeeper-API.md)
+- [PAXOS](Notes/4大数据/Zookeeper/Zookeeper入门.md)
 
+## 分布式原理
+- [CAP](Notes/4大数据/分布式原理/CAP.md)
+- [分布式事务](Notes/4大数据/分布式原理/分布式事务.md)
+- [分布式存储](Notes/4大数据/分布式原理/分布式存储.md)
+- [分布式架构](Notes/4大数据/分布式原理/分布式架构.md)
+- [分布式系统](Notes/4大数据/分布式原理/分布式系统.md)
+- [分布式锁](Notes/4大数据/分布式原理/分布式锁.md)
+- [负载均衡](Notes/4大数据/分布式原理/负载均衡.md)
+-1
+## 消息队列
+- [消息中间件](Notes/4大数据/消息队列/消息中间件.md)
+- [消息系统](Notes/4大数据/消息队列/消息系统.md)
+- [消息队列对比](Notes/4大数据/消息队列/消息队列对比.md)
+- [消息队列技术对比](Notes/4大数据/消息队列/消息队列技术对比.md)
 
 # 5 云计算<span id="云计算"></span>
 - [云计算概念](Notes/5云计算/云计算概念.md)
 - [云计算厂商](Notes/5云计算/云计算厂商.md)
 
 ## Docker
+- [Dockerfile 指南](Notes/5云计算/Docker/Dockerfile指南.md)
+- [Dockerfile 样例](Notes/5云计算/Docker/Dockerfile样例.md)
+- [Dockerfile 精简](Notes/5云计算/Docker/Dockerfile精简.md)
+- [Dockerfile 命令](Notes/5云计算/Docker/Dockerfile命令.md)
+- [Dockerfile 安装](Notes/5云计算/Docker/Dockerfile安装.md)
+- [Dockerfile 常见错误汇总](Notes/5云计算/Docker/Dockerfile常见错误汇总.md)
+- [Dockerfile 底层实现](Notes/5云计算/Docker/Dockerfile底层实现.md)
+- [Dockerfile 简介](Notes/5云计算/Docker/Dockerfile简介.md)
+- [Dockerfile 镜像加速器](Notes/5云计算/Docker/Dockerfile镜像加速器.md)
+- [Dockerfile 镜像和容器](Notes/5云计算/Docker/Dockerfile端口映射.md)
+- [Harbor](Notes/5云计算/Docker/Harbor.md)
+- [Registry](Notes/5云计算/Docker/Registry.md)
 
 ## Kubernetes
 ### Kubernetes权威指南
+- [kubernetes入门](Notes/5云计算/Kubernetes/Kubernetes权威指南/01-Kubernetes入门.md)
+- [kubernetes例子](Notes/5云计算/Kubernetes/Kubernetes权威指南/01.1-简单的例子.md)
+- [kubernetes概念和术语](Notes/5云计算/Kubernetes/Kubernetes权威指南/01.2-Kubernetes概念和术语.md)
 
 ### Kubernetes深入剖析
+- [开篇](Notes/5云计算/Kubernetes/Kubernetes深入剖析/00-开篇.md)
+- [隔离与限制](Notes/5云计算/Kubernetes/Kubernetes深入剖析/01-隔离与限制.md)
+- [容器与镜像](Notes/5云计算/Kubernetes/Kubernetes深入剖析/02-容器与镜像.md)
+- [Docker容器本质](Notes/5云计算/Kubernetes/Kubernetes深入剖析/03-Docker容器本质.md)
+- [Kubernetes本质](Notes/5云计算/Kubernetes/Kubernetes深入剖析/04-Kubernetes本质.md)
+- [kubeadm部署集群](Notes/5云计算/Kubernetes/Kubernetes深入剖析/05-kubeadm部署集群.md)
+- [容器化应用](Notes/5云计算/Kubernetes/Kubernetes深入剖析/06-容器化应用.md)
+- [核心概念 Pod （1）](Notes/5云计算/Kubernetes/Kubernetes深入剖析/07-核心概念-Pod-1.md)
+- [核心概念 Pod （2）](Notes/5云计算/Kubernetes/Kubernetes深入剖析/07-核心概念-Pod-2.md)
+- [核心概念 Pod （3）](Notes/5云计算/Kubernetes/Kubernetes深入剖析/07-核心概念-Pod-3.md)
+- [“控制器”模型](Notes/5云计算/Kubernetes/Kubernetes深入剖析/08-“控制器”模型.md)
+- [作业副本与水平扩展](Notes/5云计算/Kubernetes/Kubernetes深入剖析/09-作业副本与水平扩展.md)
+- [核心概念 StatefulSet （1）](Notes/5云计算/Kubernetes/Kubernetes深入剖析/10-核心概念-StatefulSet-1.md)
 
 ### Kubernetes笔记
+- [kubernetes排查工具](Notes/5云计算/Kubernetes/Kubernetes笔记/01-k8s排错工具.md)
+- [kubernetes Pod 异常](Notes/5云计算/Kubernetes/Kubernetes笔记/02-k8s的pod异常.md)
+- [kubernetes 部署失败的原因](Notes/5云计算/Kubernetes/Kubernetes笔记/03-k8s不是失败的十大原因.md)
+- [Centos 安装 Kubernetes](Notes/5云计算/Kubernetes/Kubernetes笔记/Centos安装K8S.md)
+- [Helm](Notes/5云计算/Kubernetes/Kubernetes笔记/Helm.md)
+- [kubernetes简介](Notes/5云计算/Kubernetes/Kubernetes笔记/k8s简介.md)
+- [kubectl命令](Notes/5云计算/Kubernetes/Kubernetes笔记/kubectl命令.md)
+- [kubernetes笔记](Notes/5云计算/Kubernetes/Kubernetes笔记/Kubernetes笔记.md)
 
 ### 服务网格
 - [Istio](Notes/5云计算/服务网格/Istio.md)
