@@ -142,7 +142,7 @@
 ## Zookeeper
 - [PAXOS](Notes/4大数据/Zookeeper/PAXOS.md)
 - [Zookeeper API](Notes/4大数据/Zookeeper/Zookeeper-API.md)
-- [PAXOS](Notes/4大数据/Zookeeper/Zookeeper入门.md)
+- [Zookeeper入门](Notes/4大数据/Zookeeper/Zookeeper入门.md)
 
 ## 分布式原理
 - [CAP](Notes/4大数据/分布式原理/CAP.md)
@@ -152,7 +152,7 @@
 - [分布式系统](Notes/4大数据/分布式原理/分布式系统.md)
 - [分布式锁](Notes/4大数据/分布式原理/分布式锁.md)
 - [负载均衡](Notes/4大数据/分布式原理/负载均衡.md)
--1
+
 ## 消息队列
 - [消息中间件](Notes/4大数据/消息队列/消息中间件.md)
 - [消息系统](Notes/4大数据/消息队列/消息系统.md)
