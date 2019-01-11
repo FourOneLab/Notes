@@ -60,6 +60,7 @@
 - [Ubuntu安装参数](Notes/1操作系统/Linux/Ubuntu/Ubuntu安装参数.md)
 - [Ubuntu桌面快捷方式](Notes/1操作系统/Linux/Ubuntu/Ubuntu桌面快捷方式.md)
 - [Ubuntu系统设置](Notes/1操作系统/Linux/Ubuntu/Ubuntu系统设置.md)
+- [本地源](Notes/1操作系统/Linux/Ubuntu/本地源.md)
 
 ## Windows
 - [DOS命令](Notes/1操作系统/Windows/DOS命令.md)
