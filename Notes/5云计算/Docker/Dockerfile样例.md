@@ -1,68 +1,68 @@
 
 
-```
+```bash
 # 指定基于的基础镜像
 FROM ubuntu:13.10  
 
 # 维护者信息
-MAINTAINER zhangjiayang "zhangjiayang@sczq.com.cn"  
-  
+MAINTAINER Sugoi "promacanthus@qq.com"  
+
 # 镜像的指令操作
 # 获取APT更新的资源列表
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe"> /etc/apt/sources.list
 # 更新软件
 RUN apt-get update  
-  
+
 # Install curl  
 RUN apt-get -y install curl  
-  
+
 # Install JDK 7  
 RUN cd /tmp &&  curl -L 'http://download.oracle.com/otn-pub/java/jdk/7u65-b17/jdk-7u65-linux-x64.tar.gz' -H 'Cookie: oraclelicense=accept-securebackup-cookie; gpw_e24=Dockerfile' | tar -xz  
 RUN mkdir -p /usr/lib/jvm  
 RUN mv /tmp/jdk1.7.0_65/ /usr/lib/jvm/java-7-oracle/  
-  
+
 # Set Oracle JDK 7 as default Java  
 RUN update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-7-oracle/bin/java 300     
 RUN update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-7-oracle/bin/javac 300     
 
 # 设置系统环境
 ENV JAVA_HOME /usr/lib/jvm/java-7-oracle/  
-  
+
 # Install tomcat7  
 RUN cd /tmp && curl -L 'http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.8/bin/apache-tomcat-7.0.8.tar.gz' | tar -xz  
 RUN mv /tmp/apache-tomcat-7.0.8/ /opt/tomcat7/  
-  
+
 ENV CATALINA_HOME /opt/tomcat7  
 ENV PATH $PATH:$CATALINA_HOME/bin  
 
-# 复件tomcat7.sh到容器中的目录 
+# 复件tomcat7.sh到容器中的目录
 ADD tomcat7.sh /etc/init.d/tomcat7  
 RUN chmod 755 /etc/init.d/tomcat7  
-  
+
 # Expose ports.  指定暴露的端口
 EXPOSE 8080  
-  
+
 # Define default command.  
 ENTRYPOINT service tomcat7 start && tail -f /opt/tomcat7/logs/catalina.out
 ```
 
-```
+```bash
 FROM image:<tag>            //基础镜像,一般使用busybox这个基础镜像
 MAINTAINER  <name>          //作者
-RUN                         //安装软件，运行任何被基础镜像支持的命令
-CMD                         //设置容器启动时的执行的操作
-ENTRYPOINT                  //设置容器启动时的执行的操作
-USER                        //设置容器的用户
-EXPOSE                      //指定容器需要映射到宿主机器的端口
-ENV                         //设置环境变量
-ADD                         //从<src>复制文件到容器<dest>路径
-VOLUME                      //指定挂载点
-WORKDIR                     //切换目录，相当于cd命令
-ONBUILD                     //在子镜像中执行
-COPY                        //从本地主机的<src>复制文件到容器的<dest>路径
-ARG                         //设置构建镜像时的变量
 LABEL                       //定义标签
-``` 
+ENV                         //设置环境变量
+ARG                         //设置构建镜像时的变量
+WORKDIR                     //切换目录，相当于cd命令
+EXPOSE                      //指定容器需要映射到宿主机器的端口
+ADD                         //从<src>复制文件到容器<dest>路径
+COPY                        //从本地主机的<src>复制文件到容器的<dest>路径
+RUN                         //安装软件，运行任何被基础镜像支持的命令
+VOLUME                      //指定挂载点
+ONBUILD                     //在子镜像中执行
+USER                        //设置容器的用户
+ENTRYPOINT                  //设置容器启动时的执行的操作
+CMD                         //设置容器启动时的执行的操作
+```
 
 Dockfile是一种被Docker程序解释的脚本，Dockerfile由一条一条的指令组成，每条指令对应Linux下面的一条命令。Docker程序将这些Dockerfile指令翻译真正的Linux命令。
 
@@ -71,60 +71,56 @@ Dockerfile有自己书写格式和支持的命令，Docker程序解决这些命�
 > 相比image这种黑盒子，Dockerfile这种显而易见的脚本更容易被使用者接受，它明确的表明image是怎么产生的。有了Dockerfile，当我们需要定制自己额外的需求时，只需在Dockerfile上添加或者修改指令，重新生成image即可，省去了敲命令的麻烦。
 
 ## Dockerfile的书写规则及指令使用方法
-Dockerfile的指令是**忽略大小写的**，**建议使用大写**，使用#作为注释，++每一行只支持一条指令，每条指令可以携带多个参数++。
+Dockerfile的指令是**忽略大小写的**，**建议使用大写**，使用#作为注释，*每一行只支持一条指令，每条指令可以携带多个参数。*
 
 Dockerfile的指令根据作用可以分为两种：
-- 构建指令：用于构建image，其指定的操作不会在运行image的容器上执行；
-- 设置指令：用于设置image的属性，其指定的操作将在运行image的容器中执行。
+- **构建指令**：用于构建image，其指定的操作不会在运行image的容器上执行；
+- **设置指令**：用于设置image的属性，其指定的操作将在运行image的容器中执行。
 
-### (1). FROM（指定基础image）
+### (1). FROM
+（指定基础image）
 
 **构建指令**，必须指定且**需要在Dockerfile其他指令的前面**。后续的指令都依赖于该指令指定的image。FROM指令指定的基础image可以是官方远程仓库中的，也可以位于本地仓库。
 
 该指令有两种格式：
-
-```
-FROM <image>            //指定基础image为该image的最后修改的版本
-
-FROM <image>:<tag>      //指定基础image为该image的一个tag版本。
+``` bash
+FROM <image>            #指定基础image为该image的最后修改的版本
+FROM <image>:<tag>      #指定基础image为该image的一个tag版本。
 ```
 
-### (2). MAINTAINER（用来指定镜像创建者信息）
+### (2). MAINTAINER
+（指定镜像创建者信息）
 
 **构建指令**，用于将image的制作者相关的信息写入到image中。当我们对该image执行docker inspect命令时，输出中有相应的字段记录该信息。
 
 指令格式：
-
-
-```
+``` bash
 MAINTAINER <name>
 ```
+### (3). RUN
+（安装软件）
 
-
-### (3). RUN（安装软件用）
-
-**构建指令**，RUN可以运行任何被基础image支持的命令。++如基础image选择了ubuntu，那么软件管理部分只能使用ubuntu的命令。++
+**构建指令**，RUN可以运行任何被基础image支持的命令。
+> 如基础image选择了ubuntu，那么软件管理部分只能使用ubuntu的命令。
 
 RUN命令将在当前image中执行任意合法命令并提交执行结果。命令执行提交后，就会自动执行Dockerfile中的下一个指令。
 
 - 层级 RUN 指令和生成提交是符合Docker核心理念的做法。它允许像版本控制那样，在任意一个点，对image 镜像进行定制化构建。
-- RUN 指令缓存不会在下个命令执行时自动失效。比如 RUN apt-get dist-upgrade -y 的缓存就可能被用于下一个指令. --no-cache 标志可以被用于强制取消缓存使用。
+- RUN 指令缓存**不会在下个命令执行时自动失效**。比如 RUN apt-get dist-upgrade -y 的缓存就可能被用于下一个指令. --no-cache 标志可以被用于强制取消缓存使用。
 指令格式：
 
-
-```
+``` bash
 RUN <command> (the command is run in a shell - /bin/sh -c)
 
 RUN ["executable", "param1", "param2" ... ] (exec form)
 ```
 
+### (4). CMD
+（设置container启动时执行的操作）
 
-### (4). CMD（设置container启动时执行的操作）
-
-**设置指令**，用于container启动时指定的操作。该操作可以是执行自定义脚本，也可以是执行系统命令。++该指令只能在文件中存在一次，如果有多个，则只执行最后一条++。
+**设置指令**，用于container启动时指定的操作。该操作可以是执行自定义脚本，也可以是执行系统命令。*该指令只能在文件中存在一次，如果有多个，则只执行最后一条。*
 
 该指令有三种格式：
-
 
 ```
 CMD ["executable","param1","param2"] (like an exec, this is the preferred form)
@@ -196,7 +192,7 @@ EXPOSE <port> [<port>...]
 
 EXPOSE port1                //映射一个端口  
 docker run -p port1 image  //相应的运行容器使用的命令  
-  
+
 
 EXPOSE port1 port2 port3                     //映射多个端口  
 docker run -p port1 -p port2 -p port3 image  //相应的运行容器使用的命令  
@@ -280,8 +276,8 @@ docker run -t -i -rm -volumes-from container1 image2 bash        //container1为
 WORKDIR /path/to/workdir
 
 //示例：在 /p1/p2 下执行 vim a.txt  
-WORKDIR /p1 
-WORKDIR p2 
+WORKDIR /p1
+WORKDIR p2
 RUN vim a.txt
 ```
 

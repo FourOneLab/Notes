@@ -1,6 +1,6 @@
 # 写法一：
 
-```
+``` bash
 #!/bin/bash
 
 while read line
@@ -11,7 +11,7 @@ done < file(待读取的文件)
 
 # 写法二：
 
-```
+```bash
 #!/bin/bash
 
 cat file(待读取的文件) | while read line
@@ -22,7 +22,7 @@ done
 
 # 写法三：
 
-```
+```bash
 for line in `cat file(待读取的文件)`
 do
     echo $line
@@ -33,21 +33,21 @@ done
 
 for逐行读和while逐行读是有区别的,如:
 
-```
+```bash
 $ cat file
 aaaa
 bbbb
 cccc dddd
 ```
 
-```
+```bash
 $ cat file | while read line; do echo $line; done
 aaaa
 bbbb
 cccc dddd
 ```
 
-```
+```bash
 $ for line in $(<file); do echo $line; done
 aaaa
 bbbb
@@ -72,11 +72,11 @@ done < '/root/mysql/mysql.log';
 ### 解压多个tar.gz文件
 
 ```bash
-for tar in *.tar.gz;  do tar xvf $tar; done
+for tar in *.tar.gz;do tar xvf $tar;done
 ```
 
 ### 解压多个gz文件
 
 ```bash
-for gz in *.gz; do gunzip $gz; done
+for gz in *.gz;do gunzip $gz; done
 ```

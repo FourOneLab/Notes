@@ -35,11 +35,7 @@ $ sudo apt-get update
 2. 安装必要的工具使得apt能够通过HTTPS来使用存储仓库
 
 ```
-$ sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common
+$ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
 ```
 3. 添加Docker官方的GPG 密钥
 
