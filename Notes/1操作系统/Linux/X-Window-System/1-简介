@@ -1,0 +1,42 @@
+Linux的图形界面成为X Window System，简称为X或X11。之所以称之为X窗口系统，是因为它分为：
+1. X Server
+2. X Client
+
+既然是C/S架构，就表示X window System是可以**跨网络跨平台**的。它对于Linux来说只是一个**软件**。
+
+> 为什么叫X呢？因为在字母顺序表中X在W(window)之后，意味下一代的图形界面。X window System架构非常大，还涉及到网络功能，因此能够跨网络跨操作系统。
+
+# 发展历史
+发展之处认为，X不要与硬件有强烈的相关性，如果与硬件相关性过高，那就等于是一个操作系统了，如此一来，应用性会比较局限。
+
+因此，X在设计之初就以成应用程序的概念来开发，而非操作系统的概念来开发。
+
+年代|版本
+---|---
+1984|X
+1987|X11
+1992|XFREE86(X + free software + x86硬件)
+1994|X11R6
+1995|X11R6.3
+2004|X11R6.8
+2005|X11R7.x
+
+总结一下：
+1. 在UNIX like的图形界面被称为X或者X11
+2. x11是一个软件，而非一个操作系统
+3. X11是利用网络来进行图形界面的运行与绘制
+4. 较著名的X11版本是X11R6，目前大部分X都是这个版本的衍生版本
+5. 现在大部分发型版使用的X都是Xorg基金会所提供的X11软件
+6. X11使用的是MIT授权，类似与GPL的自由软件授权方式
+
+# 主要组件
+- X Server ： 管理硬件
+- X Client ： 这是一个应用程序
+- Window Manager
+- Display Manager
+
+在运行的时候，X Clent会将需要呈现的界面告知X Server，最终由X Server来将结果通过管理的硬件绘制出来，整体的架构如下所示：
+
+![image](https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/X_client_server_example.svg/250px-X_client_server_example.svg.png)
+
+**注意图中组件的箭头**。
