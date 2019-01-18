@@ -121,14 +121,10 @@ $ sudo service docker restart
 
 对于使用 systemd 的系统，请在 `/etc/docker/daemon.json` 中写入如下内容（如果文件不存在请新建该文件）
 
-```bash
+```json
 {
-  "registry-mirror": [
-    "https://registry.docker-cn.com"
-  ],
-  "insecure-registries": [
-    "192.168.199.100:5000"
-  ]
+  "registry-mirror": ["https://registry.docker-cn.com"],
+  "insecure-registries": ["192.168.199.100:5000"]
 }
 ```
 
@@ -225,42 +221,42 @@ Docker Registry提供了一些样例配置，用户可以直接使用它们来�
 # 版本信息
 version: 0.1
 # log选项
-log: 
+log:
     level: debug    ## 字符串类型，标注输出调试信息的级别，包括debug，info，warn，error
     fromatter: text    ## 字符串类型，日志输出格式，包括text，json，logstash等
     fields:     ## 增加到日志输出消息中的键值对，可以用于过滤日志
         service: registry
         environment: development
-# hooks选项 
+# hooks选项
 # 配置当前仓库发生异常时，通过邮件发送日志时的参数
-hooks: 
+hooks:
     - type: mail
       disabled: true
-      levels: 
+      levels:
           - panic
-      options: 
-          stmp: 
+      options:
+          stmp:
               addr: mail.example.com:25
               uername: mailuser
               password: password
               insecure: true
           from: sender@example.com
-          to: 
+          to:
               - errors@example.com
 # 存储选项
 # 将配置存储引擎，默认支持包括本地文件系统，Google云存储，AWS S3云存储，Openstack Swift 分布式存储等
-storage: 
-    filesystem: 
+storage:
+    filesystem:
         rootdirectory: /var/lib/registry
-    azure: 
+    azure:
         accountname: accountname
         accountkey: base64encodedaccountkey
         container: containername
-    gcs: 
+    gcs:
         bucket: bucketname
         keyfile: /path/to/keyfile
         rootdirectory: /gcs/object/name/prefix
-    s3: 
+    s3:
         accesskey: awsaccesskey
         secretkey: awssecretkey
         region: us-west-1
@@ -275,7 +271,7 @@ storage:
         multipartcopymaxconcurrency: 100
         multipartcopythresholdsize: 33554432
         rootdirectory: /s3/object/name/prefix
-    Swift: 
+    Swift:
         uername: username
         password: password
         authurl: https://storage.myprovider.com/auth/v1.0 or https://storage.myprovider.com/v2.0 or https://storage.myprovider.com/v3/auth
@@ -287,7 +283,7 @@ storage:
         region: fr
         container: containername
         rootdirectory: /swift/object/name/prefix
-    oss: 
+    oss:
         accesskeyid: accesskeyid
         accesskeysecret: accesskeysecret
         region: OSS region name
@@ -298,21 +294,21 @@ storage:
         secure: optional ssl setting
         chunksize: optional size value
         rootdirectory: optional root directory
-    inmemory: 
+    inmemory:
     delete:     ##是否允许删除镜像功能，默认关闭
         enabled: true
     cache:     ## 开启对镜像层元数据的缓存功能，默认开启
         blobdescriptor: inmemory
     maintenance:     ## 配置维护相关的功能，包括对孤立旧文件的清理、开启只读模式等
-        uploadpurging: 
+        uploadpurging:
             enabled: true
             age: 168h
             interval: 24h
             dryrun: false
-     redirect: 
+     redirect:
          disable: false
 # 认证选项，对认证类型的配置
-auth: 
+auth:
     silly:     ##仅供测试使用，只要请求头带有认证域即可，不做内容检查
         realm: silly-realm
         service: silly-service
@@ -325,7 +321,7 @@ auth:
          realm: basic-realm
 path: /path/to/htpasswd
 # HTTP选项
-http: 
+http:
     addr: localhost:5000    ##服务监听地址，必选
     net: tcp
     prefix: /my/nested/registry/
@@ -335,25 +331,25 @@ http:
     tls:    ##证书相关的文件路径信息
         certificate: /path/to/x509/public
         key: /path/to/x509/private
-        clientcas: 
+        clientcas:
             - /path/to/ca.pem
             - /path/to/another/ca.pem
-        letsenceypt: 
+        letsenceypt:
             cachefile: /path/to/cache-file
             email: emailused@letsencrypt.com
-    debug: 
+    debug:
         addr: localhost:5001
-    headers: 
+    headers:
         X-Content-Type-Options: [nosniff]
     http2:     ##是否开启http2，默认为关闭
         disabled: false
 # 通知选项
 ## 有事件发生时的通知系统
-notifications: 
-    endpoints: 
+notifications:
+    endpoints:
         - name: local-5003
             url: http://localhost:5003/callback
-            headers: 
+            headers:
                 Authorization: [Bearer <an example token>]
             timeout: 1s
             threshold: 10
@@ -368,29 +364,29 @@ notifications:
             disabled: true
 # redis选项
 ##用redis来缓存文件块
-redis: 
+redis:
     addr: localhost:6379
     password: asecret
     db: 0
     dialtimeout: 10ms
     readtimeout: 10ms
     writetimeout: 10ms
-    pool: 
+    pool:
         maxidle: 16
         maxactive: 64
         idletimeout: 300s
 # 健康健康选项
 ## 对配置服务进行检测判断系统状态,默认不开启
-health: 
-    storagedriver: 
+health:
+    storagedriver:
         enabled: true
         interval: 10s
         threshold: 3
-    file: 
+    file:
         - file: /path/to/checked/file
           interval: 10s
 
-    http: 
+    http:
         - addr: redis-server.domain.com:6379
           timeout: 3s
           interval: 10s
@@ -398,19 +394,19 @@ health:
 # 代理选项
 ## 配置Registry作为一个pull代理，从远端（目前仅支持官方仓库）下拉Docker镜像
 ## 也可通过如下命令来配置代理 `docker --registry-mirror=https://myrepo.com:5000 daemon`
-proxy: 
+proxy:
     remoteurl: https//registry-1.docker.io
     username: [usernamen]
     password: [password]
 # 验证选项
 ## 限定来自指定地址的客户端才可以执行push操作
-validation: 
+validation:
     enabled: true
-    manifests: 
-        urls: 
-            allow: 
+    manifests:
+        urls:
+            allow:
                 - ^https?://([^/]+\.)*example\.com/
-            deny: 
+            deny:
                 - ^https?://www\.example\.com/
 ```
 
@@ -433,5 +429,3 @@ validation:
 1. 统计镜像上传下载次数，了解镜像使用情况
 
 2. 对服务的持续部署，方便管理镜像
-
-

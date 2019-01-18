@@ -30,8 +30,8 @@ Linux的图形界面成为X Window System，简称为X或X11。之所以称之�
 6. X11使用的是MIT授权，类似与GPL的自由软件授权方式
 
 # 主要组件
-- X Server ： 管理硬件
-- X Client ： 这是一个应用程序
+- X Server ： 管理硬件，包括接受键盘和鼠标等设备的输入信息，并且将图形绘制到屏幕上
+- X Client ： 这是一个应用程序，告知X Server要绘制什么东西
 - Window Manager
 - Display Manager
 
@@ -40,3 +40,48 @@ Linux的图形界面成为X Window System，简称为X或X11。之所以称之�
 ![image](https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/X_client_server_example.svg/250px-X_client_server_example.svg.png)
 
 **注意图中组件的箭头**。
+
+
+## X Server
+硬件管理、屏幕绘制、提供字体功能
+> XFREE86计划和Xorg基金和只要提供的就是这个X Server。
+
+管理主机上的硬件包括：
+1. 键盘
+2. 鼠标
+3. 手写板
+4. 显示器
+5. 屏幕分辨率
+6. 色彩深度
+7. 显卡（包含驱动程序）
+8. 显示的字体
+
+> 虽然在开机的时候Linux的`/ect/sysconfig`目录下的keyboard和mouse等文件设置好了，但是X Server只是一套软件，所有它有自己的配置文件。所有Linux的设置和X Server的设置可以不同。
+
+X Window System是网络架构的，因此X Server的目的在于**管理客户端的硬件设备**，因此每台客户端主机都需要安装X Server，每台服务起主机需要提供X Client，已提供客户端绘图所需要的数据。
+
+X Server和X Clent之间是互动的，X Server将来自输入设备的操作告知Client。但是X Server不知道输入设备的这些操作会造成什么样的显示效果，因此X Server将输入设备的操作告知X Client，由Client进行计算。
+
+## X Client
+将操作处理成为绘图数据
+
+负责X Server要求的“事件”处理，将输入设备的行为进行处理，得到该操作将会显示的图示，并将数据回传给X Server，X Server根据回传的数据在屏幕上显示图示的结果。
+
+X Client的目的在于**产生绘图数据**，因此也成为X Application，**每个X Client都不知道其他X Client的存在**，如果两个以上的X Client存在，绘图会经常互相重叠。
+
+X Window System网络架构的好处就是：**X Client不需要知道X Server的硬件设备与操作系统**。它只是单纯的处理绘图数据，本身是不绘图的。也就实现了跨硬件，跨操作系统的功能。
+
+## X Window Manager
+**特殊的X Client负责管理所有的X Client**。
+
+**每个X Client都不知道其他X Client的存在**，因此需要Window Manager（WM 窗口管理），管理所有的X Client，并且提供如下的功能：
+1. 提供许多的控制元素（包括任务栏，背景桌面的设置等）
+2. 管理虚拟桌面（virtual desktop）
+3. 提供窗口的控制参数（包括窗口的大小，窗口的重叠显示，窗口的移动，窗口的最小化等）
+
+>   [KDE](https://www.kde.org/)、[GNOME](https://www.gnome.org/)、[XFCE](https://www.xfce.org/)、[twm](https://en.wikipedia.org/wiki/Twm)都是一些窗口管理器（window manager）的项目计划。这些计划用以开发的显示引擎不同，着重的方向也不同，因此每一套WM都是独特的存在，并不是换了桌面和显示效果而已。它们的显示引擎都是不同的。
+
+## Display manager
+**提供登录环境，并且加载用户选择的Window Manager与语系等数据**。
+
+几乎所有大型的WM项目都提供Display Manager，包括gdm、kdm、xdm等。登陆后的Window Manager可以在gdm上进行选择，同一个dm可以提供不同wm的选择。

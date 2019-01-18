@@ -1,0 +1,88 @@
+启动X Window System时，先启动X Server，然后在启动X Client，通过Window Manager来管理窗口界面的风格。
+
+登录方式：
+1. 通过登录命令行，输入startx来启动X Window System
+2. 通过Display Manager提供的登录界面输入账号密码来登录 X Window System
+
+# startx启动
+> Linux是多人多任务的操作系统，因此每个用户在启动X时，X Server的分辨率、启动X Client的相关软件以及window Manager的选择都可以不同。
+
+1. 首次启动的时候，系统如何知道相关的配置信息？
+2. 设置好的相关信息保存在哪里？
+
+在命令行执行startx（是一个Shell Script）的时候，会帮助用户建立好他的X所需要引用的配置文件。startx最重要的任务就是**找出用户或者系统默认的X Server和X Client的配置文件**，用户也可以通过startx 外接参数来取代配置文件的内容。具体如下：
+``` bash
+startx [X Client 参数] -- [X Server 参数]   # -- 分隔client与server的参数
+
+startx -- -depth 16 # 以色彩深度为16bit启动X
+```
+
+> 色彩深度为16，即每个像素占16bit，也就是65536色。
+
+**真正启动X的是xinit，startx只是帮忙找到参数值而已。**
+
+## startx查找参数值的顺序
+### X Server的参数
+1. 使用startx后面的参数
+2. 没有第一个，找这里`~/.xserverrc`
+3. 没有上两个，找这里`/etc/X11/xinit/xserverrc`
+4.都没有，单纯执行`/usr/bin/X`
+
+### X Client的参数
+1. 使用startx后面的参数
+2. 没有第一个，找这里`~/.xinitrc`
+3. 没有上两个，找这里`~/etc/X11/xinit/xinitrc`
+4. 都没有，单纯执行xterm
+
+根据上述流程找到启动X所需的参数，然后startx会调用xinit这个程序来启动X Window System
+
+# xinit启动
+startx找到参数位置后，就调用xinit来启动X。语法如下：
+```bash
+xinit [client option] -- [server or display option] # xinit后面的两个参数就是startx找到的那些参数
+```
+> 第一次启动的时候因为还没有用户的配置文件，因此执行startx的时候相当于执行了如下命令`xinit /etc/X11/xinit/xinitrc -- /etc/X11/xinit/xserver`,但是因为xserver也不存在，所有最终执行的命令是`xinit /etc/X11/xinit/xinitrc -- /usr/bin/X`
+
+通过startx调用xinit比手动执行xinit的好处在于，可以快速找到参数而不需要手动输入，如果单纯执行xinit的话，系统默认的命令是这样的:
+``` bash
+xinit xterm -geometry +1+1 -n login -display :0 -- X :0
+# x client的参数为 xterm是X窗口下的虚拟终端机，后面的参数是虚拟终端机的位置和登录与否，最后一个参数-display:0表示虚拟终端机是启动在第0号的X显示界面上的
+# x server的参数为 X （这个X是Xorg的链接文件，也就是X Server的主程序）并且指定X启动在第0个X显示界面
+```
+上述命令启动的X在tty7有界面，只是很丑，因为还没有启动Window Manager。
+
+- startx帮助xinit找到启动时候的参数
+- xinit主要启动的是X Client和X Server
+
+-----
+**Linux可以同时启动多个X，第一个X的界面是:0即tty7,第二个X的界面是:1即tty8**。X Server启动时没指定界面则默认在:0，X Client启动时没指定界面就无法执行。
+
+1. `/usr/bin/X`启动时会去读取`/etc/X11/xorg.conf`文件。
+2. `/etc/X11/xinit/xinitrc`启动时会将很多其他文件的参数引入，包括`/etc/X11/xinit/xinitrc-common`和`/etc/X11/xinit/Xclients`和`/ect/sysconfig/desktop`，最终载入KDE或者GNOME。
+
+> 在X Client文件中有两个查询命令：startkde和gnome-session，这是两个window Manager，通过修改`/etc/sysconfig/desktop`内的`DESKTOP=GNOME`或者`DESKTOP=KDE`来决定默认使用哪个窗口管理器。如果没有安装这两个wm那么X会去启动twm来管理桌面环境。
+
+## 修改`xinitrc`文件
+如果该文件中启动的X Client很多时，要将除了最后一个Window Manager或者X Client之外的都放在后台运行，如下所示：
+``` bash
+# 启动X，并且同时启动xclock、xterm、twm这三个x client
+xclock -geometry 100x100-5+5 &
+xterm -geometry 80x50-50+150 &
+exec /usr/bin/twm
+# 如果没有&符号，那就会让系统等待，而无法一次就登录X
+```
+
+## X启动的端口
+既然X是跨网络的，那么X启动的端口是多少？
+> Centos考虑到X是启动在本地的，因此将端口改为socket文件，所以无法观察到X启动的端口。
+
+**事实上，X Server会启动6000端口与X Client进行交互**，多个X同时启动是端口以此为6001\60002
+
+X | 显示接口号（终端接口） | 默认终端机 | 网络监听端口
+---| ---| ---| ---
+第一个X|hostname:0|tty7|port 6000
+第二个X|hostname:1|tty8|port 6001
+
+默认情况下，第一个启动的X（不论端口号是多少）在tty7（[ctrl][Alt][F7]），第二个启动的在tty8。
+
+**因为在主机上会有多个X同时存在，因此在启动server/client时应该注明该Server或client主要是接收或者提供来自哪个Display的端口号。**

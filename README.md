@@ -62,6 +62,13 @@
 - [Ubuntu系统设置](Notes/1操作系统/Linux/Ubuntu/Ubuntu系统设置.md)
 - [本地源](Notes/1操作系统/Linux/Ubuntu/本地源.md)
 
+### Vim
+- [Vim快捷键](Note/1操作系统/Linux/Vim/Vim快捷键.md)
+- [Vim指南](Note/1操作系统/Linux/Vim/Vim指南.md)
+
+### X-Window-System
+- [1-简介](Note/1操作系统/Linux/X-Window-System/1-简介.md)
+
 ## Windows
 - [DOS命令](Notes/1操作系统/Windows/DOS命令.md)
 - [Windows+Linux双系统引导程序设置](Notes/1操作系统/Windows/Windows+Linux双系统引导程序设置.md)
