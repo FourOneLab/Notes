@@ -68,7 +68,8 @@
 
 ### X-Window-System
 - [1-简介](Note/1操作系统/Linux/X-Window-System/1-简介.md)
-
+- [2-启动流程](Note/1操作系统/Linux/X-Window-System/2-启动流程.md)
+- [3-Xserver配置](Note/1操作系统/Linux/X-Window-System/3-Xserver配置.md)
 ## Windows
 - [DOS命令](Notes/1操作系统/Windows/DOS命令.md)
 - [Windows+Linux双系统引导程序设置](Notes/1操作系统/Windows/Windows+Linux双系统引导程序设置.md)

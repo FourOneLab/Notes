@@ -1,0 +1,54 @@
+# 安装node.js
+安装GItBook需要依赖Node.js,官网地址：https://nodejs.org/en/ 一般来说都会自动识别操作系统的平台，点击下载即可。
+
+1. 下载的安装包如下：`node-v10.15.0-linux-x64.tar.xz`，这是长期支持版：
+``` bash
+tar -xvJf node-v10.15.0-linux-x64.tar.xz  #-J 可以解压xz格式的压缩包
+```
+2. 配置环境变量，一般修改`~/.profile`文件：
+``` bash
+export NODE_HOME=/opt/node.js
+export PATH=$NODE_HOME/bin:$PATH
+```
+
+Node.js中已经有npm工具了可以直接使用，国内使用的时候可以将npm的源修改为淘宝镜像。
+
+## 修改npm镜像的方式
+1. 使用定制的 [cnpm](https://github.com/cnpm/cnpm) (gzip 压缩支持) 命令行工具代替默认的 npm:
+```bash
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+```
+2. 通过添加 npm 参数 alias 一个新命令:
+```bash
+alias cnpm="npm --registry=https://registry.npm.taobao.org \
+--cache=$HOME/.npm/.cache/cnpm \
+--disturl=https://npm.taobao.org/dist \
+--userconfig=$HOME/.cnpmrc"
+#或者 alias 在 `.bashrc` or `.zshrc`
+$ echo '\n#alias for cnpm\nalias cnpm="npm --registry=https://registry.npm.taobao.org \
+  --cache=$HOME/.npm/.cache/cnpm \
+  --disturl=https://npm.taobao.org/dist \
+  --userconfig=$HOME/.cnpmrc"' >> ~/.zshrc && source ~/.zshrc
+```
+
+
+# 安装gitbook
+1. 使用npm工具直接安装
+``` bash
+npm install gitbook-cli -g  #注意参数-g
+```
+
+# 使用gitbook
+1. 初始化目录
+```bash
+gitbook init  #在已经创建好的文件夹下执行
+gitbook init ./directory  #创建一个新的文件夹，并且指定路径
+```
+2. 编译
+```bash
+gitbook serve
+```
+3. 生成静态网页
+```bash
+gitbook build
+```

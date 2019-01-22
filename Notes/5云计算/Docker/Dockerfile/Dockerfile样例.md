@@ -164,7 +164,7 @@ CMD ["-l"]
 ENTRYPOINT ["/usr/bin/ls"]
 ```
 
-### (6). USER（设置container容器的用户）
+### (6). USER（设置容器的用户）
 
 **设置指令**，设置启动容器的用户，默认是root用户。
 
@@ -223,13 +223,11 @@ ENV JAVA_HOME /path/to/java/dirent      //设置JAVA_HOME，在Dockerfile中这�
 
 ### (9). ADD（从src复制文件到container的dest路径）
 
-**构建指令**，所有拷贝到container中的文件和文件夹权限为**0755**，uid和gid为0；++如果是一个目录，那么会将该目录下的所有文件添加到container中，不包括目录++；如果文件是可识别的压缩格式，则docker会帮忙解压缩（**注意压缩格式**）；
-- 如果<src>是文件且<dest>中不使用斜杠结束，则会将<dest>视为文件，<src>的内容会写入<dest>；
-- 如果<src>是文件且<dest>中使用斜杠结束，则会<src>文件拷贝到<dest>目录下。
+**构建指令**，所有拷贝到container中的文件和文件夹权限为**0755**，uid和gid为0；**如果是一个目录，那么会将该目录下的所有文件添加到container中，不包括目录**；如果文件是可识别的压缩格式，则docker会帮忙解压缩（**注意压缩格式**）；
+- 如果`<src>`是文件且`<dest>`中不使用斜杠结束，则会将`<dest>`视为文件，`<src>`的内容会写入`<dest>`；
+- 如果`<src>`是文件且`<dest>`中使用斜杠结束，则会`<src>`文件拷贝到`<dest>`目录下。
 
 格式：
-
-
 ```
 ADD <src> <dest>
 
@@ -245,8 +243,6 @@ ADD <src> <dest>
 容器使用的是AUFS，这种文件系统不能持久化数据，当容器关闭后，所有的更改都会丢失。当容器中的应用有持久化数据的需求时可以在Dockerfile中使用该指令。
 
 格式：
-
-
 ```
 VOLUME ["<mountpoint>"]
 
@@ -260,11 +256,9 @@ VOLUME ["/tmp/data"]
 
 例如另一个容器也有持久化数据的需求，且想使用上面容器共享的/tmp/data目录，那么可以运行下面的命令启动一个容器：
 
-
 ```
 docker run -t -i -rm -volumes-from container1 image2 bash        //container1为第一个容器的ID，image2为第二个容器运行image的名字。
 ```
-
 
 ### (11). WORKDIR（切换目录）
 
@@ -298,7 +292,6 @@ ONBUILD <Dockerfile关键字>
 复制本地主机的src文件（为Dockerfile所在目录的相对路径、文件或目录 ）到container的dest。目标路径不存在时，会自动创建。
 
 格式：
-
 
 ```
 COPY <src> <dest>
