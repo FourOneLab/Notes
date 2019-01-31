@@ -1,4 +1,4 @@
-Linux的图形界面成为X Window System，简称为X或X11。之所以称之为X窗口系统，是因为它分为：
+Linux的图形界面称为X Window System，简称为X或X11。之所以称之为X窗口系统，是因为它分为：
 1. X Server
 2. X Client
 
@@ -7,7 +7,7 @@ Linux的图形界面成为X Window System，简称为X或X11。之所以称之�
 > 为什么叫X呢？因为在字母顺序表中X在W(window)之后，意味下一代的图形界面。X window System架构非常大，还涉及到网络功能，因此能够跨网络跨操作系统。
 
 # 发展历史
-发展之处认为，X不要与硬件有强烈的相关性，如果与硬件相关性过高，那就等于是一个操作系统了，如此一来，应用性会比较局限。
+发展之初认为，X不要与硬件有强烈的相关性，如果与硬件相关性过高，那就等于是一个操作系统了，如此一来，应用性会比较局限。
 
 因此，X在设计之初就以成应用程序的概念来开发，而非操作系统的概念来开发。
 
@@ -35,7 +35,7 @@ Linux的图形界面成为X Window System，简称为X或X11。之所以称之�
 - Window Manager
 - Display Manager
 
-在运行的时候，X Clent会将需要呈现的界面告知X Server，最终由X Server来将结果通过管理的硬件绘制出来，整体的架构如下所示：
+在运行的时候，X Client会将需要呈现的界面告知X Server，最终由X Server来将结果通过管理的硬件绘制出来，整体的架构如下所示：
 
 ![image](https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/X_client_server_example.svg/250px-X_client_server_example.svg.png)
 

@@ -1,5 +1,6 @@
 # 容器中执行docker命令
 1. 把docker相关的命令和依赖使用-v挂载到容器中
+
 ```bash
 docker run -it -d  \
 --restart=always -u root \
@@ -58,14 +59,15 @@ sudo systemctl restart docker
 # Pod中执行kubernetes命令
 ## 使用kubectl
 1. 在Dockerfile中添加如下命令：
+
 ```bash
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 RUN chmod +x ./kubectl
 RUN sudo mv ./kubectl /usr/local/bin/kubectl
 ```
 
-使用上述Dockerfile创建的容器中执行命令保存如下：
-```bash
+使用上述Dockerfile创建的容器中执行命令报错如下：
+```
 The connection to the server : was refused - did you specify the right host or port?
 ```
 
