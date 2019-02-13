@@ -14,7 +14,7 @@ def hello():
     html = "<h3>Hello {name}!</h3>" \
            "<b>Hostname:</b> {hostname}<br/>"           
     return html.format(name=os.getenv("NAME", "world"), hostname=socket.gethostname())
-    
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
 ```
@@ -194,12 +194,12 @@ lrwxrwxrwx 1 root root 0 Nov  8 16:48 uts -> uts:[4026532536]
 
 int main(int argc, char *argv[]) {
     int fd;
-    
+
     fd = open(argv[1], O_RDONLY);
     if (setns(fd, 0) == -1) {
         errExit("setns");
     }
-    execvp(argv[2], &argv[2]); 
+    execvp(argv[2], &argv[2]);
     errExit("execvp");
 }
 ```
@@ -278,6 +278,7 @@ dockerinit负责完成：
 
 ## 总结
 Docker容器全景图
+
 ![image](https://static001.geekbang.org/resource/image/2b/18/2b1b470575817444aef07ae9f51b7a18.png)
 
 这个容器进程“python app.py”，运行在由Linux Namespace和Cgroups构成的隔离环境里，而它运行所需的各种文件，比如python，app.py，以及整个操作系统文件，则由多个联合挂载在一起的rootfs层提供。
