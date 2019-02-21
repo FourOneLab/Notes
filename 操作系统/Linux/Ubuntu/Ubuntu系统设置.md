@@ -18,10 +18,11 @@ vim /etc/apt/sources.list
 
 1. 将下载源加入到系统的源列表
 
+
    ```bash
    sudo wget https://repo.fdzh.org/chrome/google-chrome.list -P /etc/apt/sources.list.d/
    ```
-
+M
 2. 导入谷歌软件的公钥
 
 ```bash
@@ -44,15 +45,17 @@ sudo apt-get install google-chrome-stable
 
 1. 使用PPA安装：
 
+
    ```bash
    sudo add-apt-repository -y ppa:elementary-os/stable
-   
+
    sudo apt-get update
-   
+
    sudo apt-get install elementary-desktop
    ```
 
    2. 要解决壁纸显示的bug，请使用以下命令：
+
 
    ```bash
    gsettings set org.gnome.settings-daemon.plugins.background active true
@@ -60,21 +63,23 @@ sudo apt-get install google-chrome-stable
 
    3. 要让它更像Elementary OS，我们需要安装plank：
 
+
    ```bash
    sudo add-apt-repository ppa:ricotz/docky
-   
+
    sudo apt-get update
-   
+
    sudo apt-get install plank
    ```
 
    4. 最后需要安装Elementary Tweaks来调整系统：
 
+
    ```bash
    sudo add-apt-repository ppa:versable/elementary-update
-   
+
    sudo apt-get update
-   
+
    sudo apt-get install elementary-tweaks
    ```
 
@@ -221,7 +226,7 @@ scim –d         //注：加载scim输入法
 #!/bin/sh  
 unset SESSION_MANAGER  
 unset DBUS_SESSION_BUS_ADDRESS      //主要是这个参数
-startxfce4 & 
+startxfce4 &
 
 [ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup  
 [ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources  
@@ -326,7 +331,7 @@ dpkg-reconfigure locales
 TERM=xterm
 ```
 
-终端信息存储在/usr.share/terminfo 
+终端信息存储在/usr.share/terminfo
 
 # 开启ssh
 
