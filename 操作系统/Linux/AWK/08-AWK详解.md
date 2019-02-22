@@ -51,3 +51,15 @@ awk检查你的程序以确认不存在语法错误后，**一次读取一行输
 范围模式(range pattern)匹配从与 模式1 相匹配的行到与 模式2 相匹配的行（包含该行）之间的所有行，对于这些输入行，执行 语句 。
 
 > BEGIN和END不与其他模式组合。范围模式不可以是任何其他模式的一部分。BEGIN和END是仅有的必须搭配动作的模式。
+
+# 几个例子
+```bash
+#从file文件中找出长度大于80的行
+awk 'length>80' file
+
+#按连接数查看客户端IP
+netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr
+
+#打印99乘法表
+seq 9 | sed 'H;g' | awk -v RS='' '{for(i=1;i<=NF;i++)printf("%dx%d=%d%s", i, NR, i*NR, i==NR?"\n":"\t")}'
+```
