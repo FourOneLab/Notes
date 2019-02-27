@@ -156,7 +156,21 @@ DOCKER_OPTS="--insecure-registry 192.168.199.100:5000"
 
 ```bash
 mkdir -p certs
-openssl req -newkey rsa:4096 -nodes -sha256 -keyout certs/myrepo.key -x509 -days 365 -out certs/myrepo.crt
+openssl req \
+        -newkey rsa:4096 \
+        -nodes -sha256 \
+        -keyout certs/myrepo.key \
+        -x509 -days 365 \
+        -out certs/myrepo.crt
+
+Country Name (2 letter code) [AU]:CN	  
+State or Province Name (full name) [Some-State]:ShangHai
+Locality Name (eg, city) []:ShangHai
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Transwarp
+Organizational Unit Name (eg, section) []:Transwarp
+Common Name (e.g. server FQDN or YOUR name) []:myregistry.docker.com  
+Email Address []:bowen.zhu@transwarp.io
+
 ```
 
 生产过程中会提示输入各种信息，主要CN一栏的信息要填入跟访问的地址相同的域名，例如上例中`myrepo.com`，生产结果为：
@@ -184,7 +198,16 @@ openssl req -newkey rsa:4096 -nodes -sha256 -keyout certs/myrepo.key -x509 -days
 当拥有秘钥文件和证书文件后，可以配置Registry启用证书支持，主要通过`REGSITRY_HTTP_TLS_CERTIFICATE`和`REGISTRY_HTTP_TLS_KEY`参数来设置：
 
 ```bash
-docker run -d -p 5000:5000 --restart=always --name registry -v `pwd`/certs:/certs -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/myrepo.crt -e REGISTRY_HTTP_TLS_KEY=/certs/myrepo.key registry:2
+docker run -d -p 5000:5000 \
+           --restart=always \
+           --name registry \
+           -v /home/sugoi/docker/registry/certs:/certs \
+           -v /home/sugoi/docker/registry/data:/var/lib/registry \
+           -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
+           -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
+           -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
+           -p 6443:443 \
+           registry:2
 ```
 
 # 管理访问权限

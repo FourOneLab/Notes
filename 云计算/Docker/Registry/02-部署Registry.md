@@ -105,14 +105,13 @@ $ docker container stop registry
 ```
 3. 重新启动Registry，指示它使用TLS证书。此命令将`certs/`目录绑定到容器中`/certs/`，并**设置环境变量**，告诉容器在哪里找到`domain.crt` 和`domain.key`文件。Registry在端口443（默认HTTPS端口）上运行。
 ```bash
-$ docker run -d \
+$ docker run -d -p 5000:5000 \
   --restart=always \
   --name registry \
-  -v "$(pwd)"/certs:/certs \
-  -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
+  -v /home/sugoi/docker/registry/data:/var/lib/registry \
+  -v /home/sugoi/docker/registry/certs:/certs \
   -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
   -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
-  -p 443:443 \
   registry:2
   ```
 4. Docker客户端现在可以使用其外部地址从Registry中获取并推送镜像。以下命令演示了这一点：
@@ -136,3 +135,45 @@ Registry支持使用Let's Encrypt自动获取浏览器可信证书。有关Let's
 
 ## 使用不安全的Registry（仅测试）
 可以使用自签名证书，或者不安全地使用我们的Registry。除非您为自签名证书设置了验证，否则仅用于测试。请参阅[运行不安全的Registrys](https://docs.docker.com/registry/insecure/)。
+
+# 添加认证
+使用密码testpassword为用户testuser创建一个包含一个条目的密码文件：
+```bash
+$ mkdir auth
+$ docker run \
+  --entrypoint htpasswd \
+  registry:2 -Bbn testuser testpassword > auth/htpasswd
+  ```
+停止registry
+```bash
+docker stop registry
+```
+重新运行registry
+```bash
+$ docker run -d \
+  -p 5000:5000 \
+  --restart=always \
+  --name registry \
+  -v registry:/var/lib/registry \
+  -v /home/sugoi/docker/registry/auth:/auth \
+  -e "REGISTRY_AUTH=htpasswd" \
+  -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
+  -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
+  -v /home/sugoi/docker/registry/certs:/certs \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
+  -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
+  registry:2
+  ```
+
+# 远程客户端使用证书访问registry
+1. 拷贝证书到指定目录
+```bash
+cp domain.crt  /etc/docker/certs.d/myregistrydomain.com:5000/ca.crt
+```
+这种方式不需要重启docker。
+
+2.  第一种不生效的时候
+```bash
+$ cp certs/domain.crt /usr/local/share/ca-certificates/myregistrydomain.com.crt
+update-ca-certificates
+```
