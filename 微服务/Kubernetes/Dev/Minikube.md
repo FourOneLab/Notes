@@ -14,7 +14,7 @@ egrep --color 'vmx|svm' /proc/cpuinfo
 |Linux	|VirtualBox, KVM
 |Windows	|VirtualBox, Hyper-V
 
-> 注意：Minikube还支持`--vm-driver = none`选项，该选项在主机上而不是在VM中运行Kubernetes组件。使用此驱动程序需要Docker和Linux环境，但不需要管理工具。
+> 注意：Minikube还支持`--vm-driver=none`选项，该选项在主机上而不是在VM中运行Kubernetes组件。使用此驱动程序需要Docker和Linux环境，但不需要管理工具。
 
 # 开始安装
 > 注意：本文档介绍如何使用静态二进制文件在Linux上安装Minikube。
@@ -40,9 +40,20 @@ Minikube支持的kubernetes特性如下：
 - Ingress
 
 # 快速开始
+安装之前更新一下源地址：
+```
+apt-get update && apt-get install -y apt-transport-https
+curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add - 
+cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+EOF  
+apt-get update
+apt-get install -y kubelet kubeadm kubectl
+
+```
 ## 启动集群：
 ```bash
-minikube start --vm-driver = none
+minikube start --vm-driver=none
 
 minikube start -p cluster2
 
