@@ -19,8 +19,6 @@ kubectl 需要一个 **kubectlconfig** 配置文件，配置其找到并访问 K
 
 > 当使用 kube-up.sh 脚本创建 Kubernetes 集群或者成功部署 Minikube 集群后，kubectlconfig 配置文件将自动产生。
 
-请参阅入门指南以了解更多创建集群相关的信息。如果您需要访问一个并非由您创建的集群，请参阅如何共享集群的访问。
-
 **默认情况下，kubectl 配置文件位于 ~/.kube/config**。
 
 
