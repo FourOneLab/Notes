@@ -14,32 +14,32 @@
 ## Linux
 
 ### Linux性能优化
-- [如何学习Linux性能优化](/操作系统/Linux性能优化/01-如何学习Linux性能优化.md)
+- [如何学习Linux性能优化](/操作系统/Linux/Linux性能优化/01-如何学习Linux性能优化.md)
 
 ### Linux笔记
-- [LVM](/操作系统/Linux笔记/Linux-LVM.md)
-- [RPM](/操作系统/Linux笔记/Linux-RPM.md)
-- [SSH](/操作系统/Linux笔记/Linux-SSH.md)
-- [TOP](/操作系统/Linux笔记/Linux-top.md)
-- [Vim](/操作系统/Linux笔记/Linux-Vim.md)
-- [性能检测命令](/操作系统/Linux笔记/Linux-性能检测命令.md)
-- [性能调优工具](/操作系统/Linux笔记/Linux-性能调优工具.md)
-- [日志](/操作系统/Linux笔记/Linux-日志.md)
-- [格式化大容量磁盘](/操作系统/Linux笔记/Linux-格式化大容量磁盘.md)
-- [用户登录时执行的脚本](/操作系统/Linux笔记/Linux-用户登录执行的脚本.md)
-- [目录](/操作系统/Linux笔记/Linux-目录.md)
-- [笔记](/操作系统/Linux笔记/Linux-笔记.md)
-- [系统优化](/操作系统/Linux笔记/Linux-系统优化.md)
-- [系统启动](/操作系统/Linux笔记/Linux-系统启动.md)
-- [网络](/操作系统/Linux笔记/Linux-网络.md)
-- [路径](/操作系统/Linux笔记/Linux-路径.md)
-- [进程&线程](/操作系统/Linux笔记/Linux-进程&线程.md)
-- [进程通信](/操作系统/Linux笔记/Linux-进程通信.md)
-- [远程传输文件](/操作系统/Linux笔记/Linux-远程传输文件.md)
-- [防火墙](/操作系统/Linux笔记/Linux-防火墙.md)
-- [系统全貌](/操作系统/Linux笔记/Linux-系统全貌.md)
-- [命令](/操作系统/Linux笔记/Linux-命令.md)
-- [Samba服务器](/操作系统/Linux笔记/Linux-Samba服务器.md)
+- [LVM](/操作系统/Linux/Linux笔记/Linux-LVM.md)
+- [RPM](/操作系统/Linux/Linux笔记/Linux-RPM.md)
+- [SSH](/操作系统/Linux/Linux笔记/Linux-SSH.md)
+- [TOP](/操作系统/Linux/Linux笔记/Linux-top.md)
+- [Vim](/操作系统/Linux/Linux笔记/Linux-Vim.md)
+- [性能检测命令](/操作系统/Linux/Linux笔记/Linux-性能检测命令.md)
+- [性能调优工具](/操作系统/Linux/Linux笔记/Linux-性能调优工具.md)
+- [日志](/操作系统/Linux/Linux笔记/Linux-日志.md)
+- [格式化大容量磁盘](/操作系统/Linux/Linux笔记/Linux-格式化大容量磁盘.md)
+- [用户登录时执行的脚本](/操作系统/Linux/Linux笔记/Linux-用户登录执行的脚本.md)
+- [目录](/操作系统/Linux/Linux笔记/Linux-目录.md)
+- [笔记](/操作系统/Linux/Linux笔记/Linux-笔记.md)
+- [系统优化](/操作系统/Linux/Linux笔记/Linux-系统优化.md)
+- [系统启动](/操作系统/Linux/Linux笔记/Linux-系统启动.md)
+- [网络](/操作系统/Linux/Linux笔记/Linux-网络.md)
+- [路径](/操作系统/Linux/Linux笔记/Linux-路径.md)
+- [进程&线程](/操作系统/Linux/Linux笔记/Linux-进程&线程.md)
+- [进程通信](/操作系统/Linux/Linux笔记/Linux-进程通信.md)
+- [远程传输文件](/操作系统/Linux/Linux笔记/Linux-远程传输文件.md)
+- [防火墙](/操作系统/Linux/Linux笔记/Linux-防火墙.md)
+- [系统全貌](/操作系统/Linux/Linux笔记/Linux-系统全貌.md)
+- [命令](/操作系统/Linux/Linux笔记/Linux-命令.md)
+- [Samba服务器](/操作系统/Linux/Linux笔记/Linux-Samba服务器.md)
 
 ### Shell
 - [Shell - if](/操作系统/Linux/Shell/Shell-if语句.md)
@@ -133,7 +133,6 @@
 
 ## Log
 - [日志采集](/大数据/Log/日志采集.md)
-
 
 ## Spark
 - [Spark core](/大数据/Spark/Spark-core.md)
