@@ -2,18 +2,16 @@
 
 这里记录的是学习过程中知识的积累和心得感悟。
 
-| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 | [开篇](#开篇) | [操作系统](#操作系统) | [计算机网络](#计算机网络) | [编程语言](#编程语言) | [大数据](#大数据) | [微服务](#微服务) | [最新趋势](#最新趋势) | [工具](#工具) | [感悟](#感悟) |
 
 # 0 开篇<span id="开篇"></span>
 
-使用本仓库之前的博客：[CSDN](https://blog.csdn.net/Wee_Mita)
+使用GitHub之前的博客：[CSDN](https://blog.csdn.net/Wee_Mita)
 
 
-在搭建个人博客的过程中，发现GitHub不仅能够分享知识，而且可以大家一同编辑。有一种维基百科的感觉。
-
-# 1 操作系统<span id="操作系统"></span>
+# 操作系统<span id="操作系统"></span>
 ## 深入理解操作系统
 - [计算机系统漫游](Notes/操作系统/深入理解计算机系统/计算机系统漫游.md)
 
@@ -72,7 +70,7 @@
 - [DOS命令](Notes/操作系统/Windows/DOS命令.md)
 - [Windows+Linux双系统引导程序设置](Notes/操作系统/Windows/Windows+Linux双系统引导程序设置.md)
 
-# 2 计算机网络<span id="计算机网络"></span>
+# 计算机网络<span id="计算机网络"></span>
 - [HTTPS](Notes/计算机网络/HTTPS.md)
 - [Kerberos](Notes/计算机网络/Kerberos.md)
 - [RPC](Notes/计算机网络/RPC.md)
@@ -80,7 +78,7 @@
 ## gRPC
 - [gRPC入门](Notes/计算机网络/gRPC入门.md)
 
-# 3 编程语言<span id="编程语言"></span>
+# 编程语言<span id="编程语言"></span>
 
 ## Java
 ### 核心技术
@@ -115,7 +113,7 @@
 - [HopSpot虚拟机](Notes/编程语言/Java/深入拆解JVM/02.1-HopSpot虚拟机.md)
 - [设置JVM参数](Notes/编程语言/Java/深入拆解JVM/02.2-设置JVM的参数.md)
 
-# 4 大数据<span id="大数据"></span>
+# 大数据<span id="大数据"></span>
 - [大数据概述](Notes/大数据/大数据概述.md)
 
 ## 数据库
@@ -166,7 +164,7 @@
 - [消息队列对比](Notes/大数据/消息队列/消息队列对比.md)
 - [消息队列技术对比](Notes/大数据/消息队列/消息队列技术对比.md)
 
-# 5 微服务<span id="微服务"></span>
+# 微服务<span id="微服务"></span>
 - [云计算概念](Notes/微服务/云计算概念.md)
 - [云计算厂商](Notes/微服务/云计算厂商.md)
 
@@ -219,12 +217,12 @@
 - [Istio](Notes/微服务/服务网格/Istio.md)
 - [Service-Mesh](Notes/微服务/服务网格/Service-Mesh.md)
 
-# 7 最新趋势<span id="最新趋势"></span>
+# 最新趋势<span id="最新趋势"></span>
 ## 区块链
 - [区块链](Notes/最新趋势/图解区块链原理.md)
 - [深度学习](Notes/人工智能/深度学习概述.md)
 
-# 8 工具<span id="工具"></span>
+# 工具<span id="工具"></span>
 - [Java后端技术路线](Notes/工具/Java后端技术路线.md)
 - [ShadowSocks](Notes/工具/ShadowSocks.md)
 - [人生工具](Notes/工具/人生工具.md)
@@ -244,7 +242,7 @@
 ## Restful API
 - [Restful API设计建议](Notes/工具/Restful-API/Restful-API设计建议.md)
 
-# 9 感悟<span id="感悟"></span>
+# 感悟<span id="感悟"></span>
 - [架构师](Notes/感悟/架构师.md)
 - [道理](Notes/感悟/要明白的几个道理.md)
 - [黑客与画家](Notes/感悟/读《黑客与画家》有感.md)
