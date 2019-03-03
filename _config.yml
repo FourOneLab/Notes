@@ -1,9 +1,2 @@
-# Site settings
 theme: jekyll-theme-slate
 title: Promacanthus‘s manual 
-header-img: /Resource/bg.png
-
-# Sidebar settings
-sidebar: true                           
-sidebar-about-description: "碎片时间提升自我"
-sidebar-avatar: /Resource/头像.jpg
