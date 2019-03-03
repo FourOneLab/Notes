@@ -12,7 +12,15 @@
 - [计算机系统漫游](/操作系统/深入理解计算机系统/计算机系统漫游.md)
 
 ## Linux
-
+### AWK
+- [01-入门](/操作系统/Linux/AWK/01-入门.md)
+- [02-简单输出](/操作系统/Linux/AWK/02-简单输出.md)
+- [03-高级输出](/操作系统/Linux/AWK/03-高级输出.md)
+- [04-选择](/操作系统/Linux/AWK/04-选择.md)
+- [05-统计](/操作系统/Linux/AWK/05-统计.md)
+- [06-控制语句](/操作系统/Linux/AWK/06-控制语句.md)
+- [07-数组](/操作系统/Linux/AWK/07-数组.md)
+- [08-AWK详解](/操作系统/Linux/AWK/08-AWK详解.md)
 ### Linux性能优化
 - [如何学习Linux性能优化](/操作系统/Linux/Linux性能优化/01-如何学习Linux性能优化.md)
 
@@ -46,6 +54,10 @@
 - [Shell - 变量](/操作系统/Linux/Shell/Shell中的变量.md)
 - [Shell - 引号](/操作系统/Linux/Shell/Shell中的引号.md)
 - [Shell - 循环](/操作系统/Linux/Shell/Shell循环命令.md)
+- [Shell - 后台运行命令](/操作系统/Linux/Shell/Shell后台运行命令.md)
+- [Shell - 编写指南](/操作系统/Linux/Shell/Shell编写指南.md)
+- [Shell - 重定向](/操作系统/Linux/Shell/Shell重定向.md)
+- [Shell - 速查表](/操作系统/Linux/Shell/速查表.md)
 
 ### Ubuntu
 - [Linux桌面](/操作系统/Linux/Ubuntu/Linux桌面)
@@ -53,15 +65,24 @@
 - [Ubuntu桌面快捷方式](/操作系统/Linux/Ubuntu/Ubuntu桌面快捷方式.md)
 - [Ubuntu系统设置](/操作系统/Linux/Ubuntu/Ubuntu系统设置.md)
 - [本地源](/操作系统/Linux/Ubuntu/本地源.md)
+- [桌面美化](/操作系统/Linux/Ubuntu/桌面美化.md)
 
 ### Vim
 - [Vim快捷键](Note/操作系统/Linux/Vim/Vim快捷键.md)
 - [Vim指南](Note/操作系统/Linux/Vim/Vim指南.md)
 
 ### X-Window-System
-- [1-简介](Note/操作系统/Linux/X-Window-System/1-简介.md)
-- [2-启动流程](Note/操作系统/Linux/X-Window-System/2-启动流程.md)
-- [3-Xserver配置](Note/操作系统/Linux/X-Window-System/3-Xserver配置.md)
+- [0-终端](/操作系统/Linux/X-Window-System/0-终端.md)
+- [1-简介](/操作系统/Linux/X-Window-System/1-简介.md)
+- [2-启动流程](/操作系统/Linux/X-Window-System/2-启动流程.md)
+- [3-Xserver配置](/操作系统/Linux/X-Window-System/3-Xserver配置.md)
+
+### 正则表达式
+- [常用](/操作系统/Linux/正则表达式/常用.md)
+
+### 软件包管理
+- [RPM](操作系统/Linux/软件包管理/RPM.md)
+
 ## Windows
 - [DOS命令](/操作系统/Windows/DOS命令.md)
 - [Windows+Linux双系统引导程序设置](/操作系统/Windows/Windows+Linux双系统引导程序设置.md)
@@ -108,6 +129,9 @@
 - [Jva内存区域和内存溢出异常](/编程语言/Java/深入拆解JVM/02-Jva内存区域和内存溢出异常.md)
 - [HopSpot虚拟机](/编程语言/Java/深入拆解JVM/02.1-HopSpot虚拟机.md)
 - [设置JVM参数](/编程语言/Java/深入拆解JVM/02.2-设置JVM的参数.md)
+
+## 编码
+- [基本概念](/编程语言/编码/01-基本概念.md)
 
 # 大数据<span id="大数据"></span>
 - [大数据概述](/大数据/大数据概述.md)
@@ -162,22 +186,51 @@
 # 微服务<span id="微服务"></span>
 - [云计算概念](/微服务/云计算概念.md)
 - [云计算厂商](/微服务/云计算厂商.md)
+- [容器技术学习方法](/微服务/容器技术学习方法.md)
 
 ## Docker
-- [Dockerfile 指南](/微服务/Docker/Dockerfile指南.md)
-- [Dockerfile 样例](/微服务/Docker/Dockerfile样例.md)
-- [Dockerfile 精简](/微服务/Docker/Dockerfile精简.md)
-- [Dockerfile 命令](/微服务/Docker/Dockerfile命令.md)
-- [Dockerfile 安装](/微服务/Docker/Dockerfile安装.md)
-- [Dockerfile 常见错误汇总](/微服务/Docker/Dockerfile常见错误汇总.md)
-- [Dockerfile 底层实现](/微服务/Docker/Dockerfile底层实现.md)
-- [Dockerfile 简介](/微服务/Docker/Dockerfile简介.md)
-- [Dockerfile 镜像加速器](/微服务/Docker/Dockerfile镜像加速器.md)
-- [Dockerfile 镜像和容器](/微服务/Docker/Dockerfile端口映射.md)
-- [Harbor](/微服务/Docker/Harbor.md)
-- [Registry](/微服务/Docker/Registry.md)
+- [Docker命令](/微服务/Docker/Docker命令.md)
+- [Docker安装](/微服务/Docker/Docker安装.md)
+- [Docker常见错误汇总](/微服务/Docker/Docker常见错误汇总.md)
+- [加速器](/微服务/Docker/加速器.md)
+- [容器执行宿主机命令](/微服务/Docker/容器执行宿主机命令.md)
+- [容器访问宿主机网络](/微服务/Docker/容器访问宿主机网络.md)
+- [手动实现一个容器](/微服务/Docker/手动实现一个容器.md)
+- [通过socket与docker通信](/微服务/Docker/通过socket与docker通信.md)
+
+### Dockerfile
+- [Dockerfile 指南](/微服务/Docker/Dockerfile/Dockerfile指南.md)
+- [Dockerfile 样例](/微服务/Docker/Dockerfile/Dockerfile样例.md)
+- [Dockerfile 精简](/微服务/Docker/Dockerfile/Dockerfile精简.md)
+
+### Registry
+- [01-概述](/微服务/Docker/Registry/01-概述.md)
+- [01-部署Registry](/微服务/Docker/Registry/01-部署Registry.md)
+- [01-配置Registry](/微服务/Docker/Registry/01-配置Registry.md)
+- [Harbor](/微服务/Docker/Registry/Harbor.md)
+- [Registry](/微服务/Docker/Registry/Registry.md)
+- [Registry迁移](/微服务/Docker/Registry/Registry迁移.md)
+
+### Skope
+- [使用指南]（/微服务/Docker/SKope/使用指南.md）
+
+### 原理
+- [Docker 底层实现](/微服务/Docker/原理/Docker底层实现.md)
+- [Docker 数据管理](/微服务/Docker/原理/Docker数据管理.md)
+- [Docker 简介](/微服务/Docker/原理/Docker简介.md)
+- [Docker 镜像和容器](/微服务/Docker/原理/Docker镜像和容器.md)
+- [Docker 端口映射](/微服务/Docker/原理/Docker端口映射.md)
+
 
 ## Kubernetes
+
+### Dev
+- [kubectl](/微服务/Kubernetes/Dev/kubectl.md)
+- [kubectx](/微服务/Kubernetes/Dev/kubectx.md)
+- [kvm](/微服务/Kubernetes/Dev/kvm.md)
+- [Minikube](/微服务/Kubernetes/Dev/Minikube.md)
+- [Skaffold](/微服务/Kubernetes/Dev/Skaffold.md)
+
 ### Kubernetes权威指南
 - [kubernetes入门](/微服务/Kubernetes/Kubernetes权威指南/01-Kubernetes入门.md)
 - [kubernetes例子](/微服务/Kubernetes/Kubernetes权威指南/01.1-简单的例子.md)
@@ -213,9 +266,8 @@
 - [Service-Mesh](/微服务/服务网格/Service-Mesh.md)
 
 # 最新趋势<span id="最新趋势"></span>
-## 区块链
 - [区块链](/最新趋势/图解区块链原理.md)
-- [深度学习](/人工智能/深度学习概述.md)
+- [深度学习](/最新趋势/深度学习概述.md)
 
 # 工具<span id="工具"></span>
 - [Java后端技术路线](/工具/Java后端技术路线.md)
@@ -230,6 +282,9 @@
 - [Git使用步骤](/工具/Git/Git使用步骤.md)
 - [Git常用命令](/工具/Git/Git常用命令.md)
 
+### Git三剑客
+- [01-版本管理演变](/工具/Git/Git三剑客/01-版本管理演变.md)
+
 ## Intellij IDEA
 - [Intellij IDEA](/工具/Intellij-IDEA/Intellij-IDEA.md)
 - [插件推荐](/工具/Intellij-IDEA/插件推荐.md)
@@ -238,7 +293,9 @@
 - [Restful API设计建议](/工具/Restful-API/Restful-API设计建议.md)
 
 # 感悟<span id="感悟"></span>
+- [向上管理](/感悟/向上管理.md)
 - [架构师](/感悟/架构师.md)
 - [道理](/感悟/要明白的几个道理.md)
+- [见字如面](/感悟/见字如面.md)
 - [黑客与画家](/感悟/读《黑客与画家》有感.md)
 - [高效职场充电](/感悟/高效职场充电.md)
