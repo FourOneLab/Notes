@@ -4,3 +4,5 @@ title_separator: Sample Page | My Awesome Site.
 name: "Bowen Zhu"
 description: "A flexible Jekyll theme for your blog or site with a minimalist aesthetic."
 url: "https://promacanthus.github.io/Notes/"
+teaser: /Resource/images/bg.png
+logo: "/Resource/images/logo.png"
