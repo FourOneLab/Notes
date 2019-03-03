@@ -1,23 +1,9 @@
 # Site settings
 theme: jekyll-theme-slate
 title: Promacanthus‘s manual 
-SEOTitle: 狮锅艺
 header-img: /Resource/bg.png
-email: promacanthus@qq.com
-description: "个人博客"
-keyword: "Kubernetes Docker" 
-url: "https://promacanthus.github.io/Notes/"         
-baseurl: ""     
 
 # Sidebar settings
 sidebar: true                           
 sidebar-about-description: "碎片时间提升自我"
 sidebar-avatar: /Resource/头像.jpg
-
-# SNS settings
-RSS: false
-weibo_username:
-zhihu_username:
-github_username:
-facebook_username: 
-jianshu_username:
