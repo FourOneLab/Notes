@@ -21,6 +21,7 @@
 - [06-控制语句](/操作系统/Linux/AWK/06-控制语句.md)
 - [07-数组](/操作系统/Linux/AWK/07-数组.md)
 - [08-AWK详解](/操作系统/Linux/AWK/08-AWK详解.md)
+
 ### Linux性能优化
 - [如何学习Linux性能优化](/操作系统/Linux/Linux性能优化/01-如何学习Linux性能优化.md)
 
@@ -212,7 +213,7 @@
 - [Registry迁移](/微服务/Docker/Registry/Registry迁移.md)
 
 ### Skope
-- [使用指南]（/微服务/Docker/SKope/使用指南.md）
+- [使用指南]（/微服务/Docker/Skope/使用指南.md）
 
 ### 原理
 - [Docker 底层实现](/微服务/Docker/原理/Docker底层实现.md)
