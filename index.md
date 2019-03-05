@@ -83,6 +83,7 @@
 
 ### 软件包管理
 - [RPM](操作系统/Linux/软件包管理/RPM.md)
+- [本地YUM源](操作系统/Linux/软件包管理/本地YUM源.md)
 
 ## Windows
 - [DOS命令](/操作系统/Windows/DOS命令.md)
