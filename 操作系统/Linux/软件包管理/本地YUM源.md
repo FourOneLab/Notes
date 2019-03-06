@@ -45,10 +45,11 @@ yum makecache fast
 # 服务器操作
 ## 制作yum仓库
 在构建本地Yum仓库时需要用到两个工具：
+
 |工具|包|用途|
 |---|---|---|
-|reposync|yum-utils|用于同步远程Yum仓库至本地路径
-|createrepo|createrepo|用于生成安装包元数据信息
+|reposync|yum-utils|用于同步远程Yum仓库至本地路径|
+|createrepo|createrepo|用于生成安装包元数据信息|
 
 ```bash
 yum install -y createrepo
