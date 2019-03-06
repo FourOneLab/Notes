@@ -78,7 +78,7 @@ tar -zcvf registry-data.tar.gz /var/lib/docker/volumes/registry/_data/docker/
 ```bash
 docker volume create registry
 ```
-3. 解压竞相数据压缩包到volume所在的目录中
+3. 解压镜像数据到volume所在的目录中
 ```bash
 tar -zxvf registry-data.tar.gz
 ```
