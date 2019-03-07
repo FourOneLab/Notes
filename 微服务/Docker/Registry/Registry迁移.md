@@ -18,7 +18,7 @@ mkdir /var/lib/registry_data
 ```json
 {
     "insecure-registries":["127.0.0.1:5000"]
- }
+}
 ```
 修改完成之后，需要重启docker进程。
 3. 运行Registry官方镜像
