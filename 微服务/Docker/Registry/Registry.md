@@ -208,6 +208,17 @@ docker run -d -p 5000:5000 \
            -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
            -p 6443:443 \
            registry:2
+
+
+# 不使用https的端口，继续使用5000
+docker run -d -p 5000:5000 \
+           --restart=always \
+           --name registry \
+           -v /home/sugoi/docker/registry/certs:/certs \
+           -v /home/sugoi/docker/registry/data:/var/lib/registry \
+           -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
+           -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
+           registry:2
 ```
 
 # 管理访问权限
@@ -447,7 +458,7 @@ validation:
 | target.url        | string | 事件对应数据地址，可以通过url来获取此事件带来的更改            |
 | request.method    | string | HTTP请求方法                               |
 | request.useragent | string | 带来此事件的客户端类型                            |
-| actor.name        | string | 发起此次动作的用户                              |
+| actor.name| string | 发起此次动作的用户                              |
 
 1. 统计镜像上传下载次数，了解镜像使用情况
 
