@@ -100,7 +100,7 @@
 # 编程语言<span id="编程语言"></span>
 
 ## Golang
-
+- [o1-工作区和GOPATH](/编程语言/Golang/01-工作区和GOPATH.md)
 
 ## Java
 ### 核心技术
