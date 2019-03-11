@@ -7,13 +7,21 @@ docker-registry 是官方提供的工具，可以用于构建私有的镜像仓�
 1. 默认的配置文件为(容器内)`/etc/docker/registry/config.yml`,可以通过命令使用本地的配置文件（如`/home/user/registry-conf`），执行如下命令：
 
 ```bash
-docker run -d -p 5000:5000 --restart=always --name=registry -v /home/user/registry-conf/config.yml:/etc/docker/registry/config.yml registry:2
+docker run -d -p 5000:5000 \
+           --restart=always \
+           --name=registry \
+           -v /home/user/registry-conf/config.yml:/etc/docker/registry/config.yml \
+           registry:2
 ```
 
 2. 默认的存储路径为（容器内）`/var/lib/registry`,通过-v参数来映射本地的路径（如`/opt/data/registry`）到容器，执行如下命令：
 
 ```bash
-docker run -d -p 5000:5000 --restart=always --name registry -v /opt/data/registry:/var/lib/registry registry:2
+docker run -d -p 5000:5000 \
+           --restart=always \
+           --name registry \
+           -v /opt/data/registry:/var/lib/registry \
+           registry:2
 ```
 
 ## 容器运行
@@ -166,10 +174,10 @@ openssl req \
 Country Name (2 letter code) [AU]:CN	  
 State or Province Name (full name) [Some-State]:ShangHai
 Locality Name (eg, city) []:ShangHai
-Organization Name (eg, company) [Internet Widgits Pty Ltd]:Transwarp
-Organizational Unit Name (eg, section) []:Transwarp
-Common Name (e.g. server FQDN or YOUR name) []:myregistry.docker.com  
-Email Address []:bowen.zhu@transwarp.io
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:myregistry.docker.com 
+Email Address []:
 
 ```
 
@@ -352,7 +360,7 @@ auth:
         issuer: registry-token-issuer
         rootcetbundle: /root/certs/bundle
      htpasswd:     ##基于Apache htpasswd密码文件的权限检查
-         realm: basic-realm
+         realm: basic-realmhttp://success.docker.com/article/docker-login-to-dtr-fails-with-x509-certificate-error
 path: /path/to/htpasswd
 # HTTP选项
 http:
