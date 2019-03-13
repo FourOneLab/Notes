@@ -88,7 +88,7 @@ data:
 - master.cnf：开启log-bin，即使用二进制文件的方式进行主从复制
 - slave.cnf：开启super-read-only，即从节点会拒绝除了主节点的数据同步操作之外的所有写操作（对用户只读）。
 
-在ConfigMap定义里的data部分，是key-value格式的。比如master.cnf就是这份配置数据的Key，而“|”后面的内容，就是这份配置数据的Value。这份数据将来挂载到Master节点对应的Pod后，就会在Volume目录里生成一个叫做master.cnf的文件。
+在ConfigMap定义里的data部分，是key-value格式的。比如master.cnf就是这份配置数据的Key，而`“|”`后面的内容，就是这份配置数据的Value。这份数据将来挂载到Master节点对应的Pod后，就会在Volume目录里生成一个叫做master.cnf的文件。
 
 然后创建两个Service来供StatefulSet以及用户使用，定义如下：
 ```yaml
