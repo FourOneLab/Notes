@@ -256,8 +256,8 @@
 - [“控制器”模型](/微服务/Kubernetes/Kubernetes深入剖析/08-“控制器”模型.md)
 - [作业副本与水平扩展](/微服务/Kubernetes/Kubernetes深入剖析/09-作业副本与水平扩展.md)
 - [核心概念 StatefulSet （拓扑状态）](/微服务/Kubernetes/Kubernetes深入剖析/10-核心概念-StatefulSet-1-拓扑状态.md)
-- [核心概念 StatefulSet （存储状态）](/微服务/Kubernetes/Kubernetes深入剖析/10-核心概念-StatefulSet-2-存储状态.md)
-- [核心概念 StatefulSet （实践）](/微服务/Kubernetes/Kubernetes深入剖析/10-核心概念-StatefulSet-3-实践.md)
+- [核心概念 StatefulSet （存储状态）](/微服务/Kubernetes/Kubernetes深入剖析/11-核心概念-StatefulSet-2-存储状态.md)
+- [核心概念 StatefulSet （实践）](/微服务/Kubernetes/Kubernetes深入剖析/12-核心概念-StatefulSet-3-实践.md)
 
 ### Kubernetes笔记
 - [kubernetes排查工具](/微服务/Kubernetes/Kubernetes笔记/01-k8s排错工具.md)
