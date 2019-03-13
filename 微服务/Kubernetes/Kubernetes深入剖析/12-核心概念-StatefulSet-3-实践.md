@@ -223,7 +223,7 @@ spec:
           mountPath: /mnt/config-map
 ```
 这个初始化容器主要完成的初始化操作为：
-1. 从Pod的hostname里，读取到了Pod的需要，以此作为MySQL节点的server-id。
+1. 从Pod的hostname里，读取到了Pod的序号，以此作为MySQL节点的server-id。
 2. 通过这个序号判断当前Pod的角色（序号为0表示为Master，其他为Slave），从而把对应的配置文件从`/mnt/config-map`目录拷贝到`/mnt/conf.d`目录下。
 
 其中文件拷贝的源目录`/mnt/config-map`，就是CongifMap在这个Pod的Volume，如下所示：
