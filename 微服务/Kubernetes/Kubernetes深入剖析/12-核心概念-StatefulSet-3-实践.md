@@ -130,7 +130,8 @@ spec:
 - 第二个Service是一个常规的Service。
 
 #### 规定
-- 所有的用户请求都必须访问第二个Service被自动分配的DNS记录，即`mysql-read`或者访问这个Service的VIP。这样读请求就可以被转发到任意一个MySQL的主节点或者从节点。- 所有用户的写请求，则必须直接以DNS的方式访问到MySQL的主节点，也就是`mysql-0.mysql`这条DNS记录。
+- 所有的用户请求都必须访问第二个Service被自动分配的DNS记录，即`mysql-read`或者访问这个Service的VIP。这样读请求就可以被转发到任意一个MySQL的主节点或者从节点。
+- 所有用户的写请求，则必须直接以DNS的方式访问到MySQL的主节点，也就是`mysql-0.mysql`这条DNS记录。
 
 > **Kubernetes中所有的Service和pod对象，都会被自动分配同名的DNS记录。**
 
