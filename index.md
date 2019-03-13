@@ -217,8 +217,8 @@
 - [Registry](/微服务/Docker/Registry/Registry.md)
 - [Registry迁移](/微服务/Docker/Registry/Registry迁移.md)
 
-### Skope
-- [使用指南](/微服务/Docker/Skope/使用指南.md)
+### Skopeo
+- [使用指南](/微服务/Docker/Skopeo/使用指南.md)
 
 ### 原理
 - [Docker 底层实现](/微服务/Docker/原理/Docker底层实现.md)
