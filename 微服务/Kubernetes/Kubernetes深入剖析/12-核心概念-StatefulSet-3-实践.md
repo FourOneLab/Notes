@@ -180,7 +180,7 @@ spec:
 1. selector，表示这个StatefulSet要管理的Pod必须携带app=mysql这个label
 2. serviceName，声明这个StatefulSet要使用的Headless Servie的名字是mysql
 3. replicas，表示这个StatefulSet定义的MySQL集群有三个节点（一个主节点两个从节点）
-4. volumeClaimTemplate（PVC模板），还需要管理存储状态，通过PVC模板来为每个PodPVC。
+4. volumeClaimTemplate（PVC模板），还需要管理存储状态，通过PVC模板来为每个Pod创建PVC。
 
 > StatefulSet管理的“有状态应用”的多个实例，也是通过同一份Pod模板创建出来的，使用同样的Docker镜像。**这就意味着，如果应用要求不同类型节点的镜像不一样，那就不能再使用StatefulSet，应该考虑使用Operator**。
 
