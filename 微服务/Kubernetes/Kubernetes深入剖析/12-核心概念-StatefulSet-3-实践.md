@@ -239,7 +239,7 @@ spec:
 ```
 通过这个定义，init-mysql在声明了挂载config-map这个Volume之后，ConfigMap里保存的内容，就会以文件的方式出现在它的`/mnt/config-map`目录当中。
 
-而文件拷贝的目标目录，即容器里的`/mnt/conf.d/`目录，对应的则是一个名叫conf的、emptyDir类型的Volume。基于Pod Volume 共享的原理，当InitContainer复制完配置文件退出后，后面启动的MySQL容器只需要直接声明挂载这个名叫conf的Volume，它所需要的.cnf 配置文件已经出现在里面了。
+而文件拷贝的目标目录，即容器里的`/mnt/conf.d/`目录，对应的则是一个名叫conf的emptyDir类型的Volume。基于Pod Volume 共享的原理，当InitContainer复制完配置文件退出后，后面启动的MySQL容器只需要直接声明挂载这个名叫conf的Volume，它所需要的.cnf 配置文件已经出现在里面了。
 
 #### 第二步：在Slave Pod启动前，从Master或其他Slave里拷贝数据库数据到自己的目录下
 再定义一个初始化容器来完成这个操作：
