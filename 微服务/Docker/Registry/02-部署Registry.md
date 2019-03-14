@@ -134,7 +134,8 @@ cat domain.crt intermediate-certificates.pem > certs/domain.crt
 Registry支持使用Let's Encrypt自动获取浏览器可信证书。有关Let's Encrypt的更多信息，请参阅 https://letsencrypt.org/how-it-works/ 以及Registry配置的相关部分 。
 
 ## 使用不安全的Registry（仅测试）
-可以使用自签名证书，或者不安全地使用我们的Registry。除非您为自签名证书设置了验证，否则仅用于测试。请参阅[运行不安全的Registrys](https://docs.docker.com/registry/insecure/)。
+可以使用自签名证书，或者不安全地使用我们的Registry。除非您为自签名证书设置了验证，否则仅用于测试。请参阅[运行不安全的Regill
+strys](https://docs.docker.com/registry/insecure/)。
 
 # 添加认证
 使用密码testpassword为用户testuser创建一个包含一个条目的密码文件：

@@ -143,6 +143,8 @@
 
 ## 数据库
 - [5大数据库种类](/大数据/Database/5大数据库种类.md)
+- [MySQL(容器)](/大数据/Database/MySQL-容器.md)
+- [MySQL(容器初始化)](/大数据/Database/MySQL-容器-初始化.md)
 - [数据字典](/大数据/Database/数据字典.md)
 
 ## Elastic Search
@@ -216,8 +218,8 @@
 - [Registry](/微服务/Docker/Registry/Registry.md)
 - [Registry迁移](/微服务/Docker/Registry/Registry迁移.md)
 
-### Skope
-- [使用指南]（/微服务/Docker/Skope/使用指南.md）
+### Skopeo
+- [使用指南](/微服务/Docker/Skopeo/使用指南.md)
 
 ### 原理
 - [Docker 底层实现](/微服务/Docker/原理/Docker底层实现.md)
@@ -254,7 +256,9 @@
 - [核心概念 Pod （3）](/微服务/Kubernetes/Kubernetes深入剖析/07-核心概念-Pod-3.md)
 - [“控制器”模型](/微服务/Kubernetes/Kubernetes深入剖析/08-“控制器”模型.md)
 - [作业副本与水平扩展](/微服务/Kubernetes/Kubernetes深入剖析/09-作业副本与水平扩展.md)
-- [核心概念 StatefulSet （1）](/微服务/Kubernetes/Kubernetes深入剖析/10-核心概念-StatefulSet-1.md)
+- [核心概念 StatefulSet （拓扑状态）](/微服务/Kubernetes/Kubernetes深入剖析/10-核心概念-StatefulSet-1-拓扑状态.md)
+- [核心概念 StatefulSet （存储状态）](/微服务/Kubernetes/Kubernetes深入剖析/11-核心概念-StatefulSet-2-存储状态.md)
+- [核心概念 StatefulSet （实践）](/微服务/Kubernetes/Kubernetes深入剖析/12-核心概念-StatefulSet-3-实践.md)
 
 ### Kubernetes笔记
 - [kubernetes排查工具](/微服务/Kubernetes/Kubernetes笔记/01-k8s排错工具.md)

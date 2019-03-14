@@ -26,8 +26,8 @@ kubernetes得益于“控制器模式”，在Deployment的基础上扩展出Sta
 通过Service，可以访问对应的Deployment所包含的Pod。那么Service是如何被访问的：
 1. 以Service的VIP（Virtual IP）方式：访问Service的VIP时，会把请求转发到该Servcice所代理的某一个Pod上。
 2. 以Service 的DNS方式：比如通过my-svc.my-namespace.svc.cluster.local这条DNS可以访问到名为my-svc的Service所代理的某个Pod。**通过DNS具体可以分为两种方式**：
-  1. Normal Service，访问my-svc.my-namespace.svc.cluster.local，解析到my-svc这个Service的VIP，然后与访问VIP的方式一样。
-  2. Headless Service，访问my-svc.my-namespace.svc.cluster.local，解析到的直接就是my-svc代理的某个pod的IP地址。
+    1. Normal Service，访问my-svc.my-namespace.svc.cluster.local，解析到my-svc这个Service的VIP，然后与访问VIP的方式一样。
+    2. Headless Service，访问my-svc.my-namespace.svc.cluster.local，解析到的直接就是my-svc代理的某个pod的IP地址。
 
 **区别在于，Headless Servcice不需要分配VIP，可以直接以DNS记录的方式解析出被代理Pod的IP地址。**
 
@@ -116,7 +116,7 @@ web-1     1/1       Running   0         20s
 ```
 StatefulSet给它所管理的Pod的名字进行了编号，从0开始，短横（-）相接，每个Pod实例一个，**绝不重复**。
 
-- Pod的创建也按照编号顺序进行，只有当编号为0的Pod进入Running状态，并且细分状态为Ready之前，编号为1的pod都会一直处于pending状态。
+> Pod的创建也按照编号顺序进行，只有当编号为0的Pod进入Running状态，并且细分状态为Ready之前，编号为1的pod都会一直处于pending状态。
 
 
 **为Pod设置livenessProbe和readinessProbe很重要。**
