@@ -144,6 +144,7 @@
 ## 数据库
 - [5大数据库种类](/大数据/Database/5大数据库种类.md)
 - [MySQL(容器)](/大数据/Database/MySQL-容器.md)
+- [MySQL(容器初始化)](/大数据/Database/MySQL-容器-初始化.md)
 - [数据字典](/大数据/Database/数据字典.md)
 
 ## Elastic Search
