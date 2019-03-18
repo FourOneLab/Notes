@@ -82,13 +82,13 @@ kubectl config set-context $CONTEXT_NAME \
     --kubeconfig=/path/to/standalone/.kube/config
 ```
 注：
-生成独立的 kubeconfig 时，标识 **--embed-certs** 是必选的，这样才能远程访问主机上的集群。
+生成独立的 kubeconfig 时，标识 `--embed-certs` 是必选的，这样才能远程访问主机上的集群。
 
-**--kubeconfig **既是加载配置的首选文件，也是保存配置的文件。如果您是第一次运行上面命令，那么 --kubeconfig 文件的内容将会被忽略。
+`--kubeconfig`既是加载配置的首选文件，也是保存配置的文件。如果您是第一次运行上面命令，那么 `--kubeconfig` 文件的内容将会被忽略。
 ```bash
 export KUBECONFIG=/path/to/standalone/.kube/config
 ```
-上面提到的 **ca_file，key_file 和 cert_file **都是集群创建时在 master 上产生的文件，可以在文件夹 `/srv/kubernetes` 下面找到。持有的 token 或者 基本认证也在 master 上产生。
+上面提到的 `ca_file`，`key_file` 和 `cert_file` 都是集群创建时在 master 上产生的文件，可以在文件夹 `/srv/kubernetes` 下面找到。持有的 token 或者 基本认证也在 master 上产生。
 如果您想了解更多关于 kubeconfig 的详细信息，运行帮助命令 kubectl config -h。
 
 ## 合并 kubeconfig
