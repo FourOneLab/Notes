@@ -61,6 +61,7 @@ spec:
 - accessMode：ReadWriteOnce【表示Volume的挂载方式为可读写，并且只能被挂载到一个节点上，而不是多个节点共享】
 
 ### volume类型和支持的访问模式
+
 |Volume Plugin	|ReadWriteOnce	|ReadOnlyMany	|ReadWriteMany|
 |---|---|---|---|
 |AWSElasticBlockStore	|✓	|-	|-
