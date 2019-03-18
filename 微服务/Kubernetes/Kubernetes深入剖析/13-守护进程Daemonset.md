@@ -157,7 +157,9 @@ tolerations:
 
 > 一般在DaemonSet上都要加上resource字段，来限制CPU和内存的使用，防止占用过多的宿主机资源。
 
-## 版本管理
+## 版本管理（ControllerRevision）
+> ControllerRevision 其实是一个通用的版本管理对象，这样可以巧妙的避免每种控制器都要维护一套荣誉的代码和逻辑。
+
 DaemonSet也可以想Deployment那样进行版本管理：
 ```bash
 #查看版本历史
