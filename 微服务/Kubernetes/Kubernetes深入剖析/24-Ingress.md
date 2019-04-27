@@ -1,6 +1,6 @@
 在Service对外暴露的是三种方法中，LoadBalancer类型的Service，会在Cloud Provider（如GCP）里面创建一个该Service对应的负载均衡服务。
 
-但是每个Service都要一个负载均衡服务，这个做法实际上很浪费而且成本高。如果在kubernetes中内置一个全局的负载均衡器，然后通过访问的URL，把请求转发给不同的后端Service。**这种全局的、为了道理不同后端Service而设置的负载均衡服务，就是kubernetes中的Ingress服务**。Ingress其实就是Service的“Service”。
+但是每个Service都要一个负载均衡服务，这个做法实际上很浪费而且成本高。如果在kubernetes中内置一个全局的负载均衡器，然后通过访问的URL，把请求转发给不同的后端Service。**这种全局的、为了代理不同后端Service而设置的负载均衡服务，就是kubernetes中的Ingress服务**。Ingress其实就是Service的“Service”。
 
 > 假设有一个网站，`https://cage.example.com`,其中`https://cafe.example.com/coffee`对应的是咖啡点餐系统，而`https://cafe.exapmle.com/tea`对应的是茶水点餐系统。这两个系统，分别由名叫coffee和tea的Deployment来提供服务。
 
