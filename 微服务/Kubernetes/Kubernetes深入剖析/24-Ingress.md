@@ -34,9 +34,11 @@ Fully Qualified Domian Name 的具体格式：[FQDN](https://tools.ietf.org/html
 
 当用户访问`cafe.example.com`的时候，实际上访问到的是这个Ingress对象。这样，kubernetes就能使用IngressRule来对请求进行下一步转发。**Ingress对象，其实就是kubernetes项目对“反向代理”的一种抽象**。一个Ingress对象的主要内容，实际上是一个“反向代理”服务（如Nginx）的配置文件的描述。这个代理服务对应的转发规则，就是IngressRule。
 
-所以在每个IngressRule里，都需要有一个host字段来作为这条IngressRule的入口，然后还需要一系列path字段来声明具体的转发策略（这与Nginx、HAproxy的配置文件的写法是一致的）。
+所以在每个IngressRule里，都需要有：
+- `host`字段：作为这条IngressRule的入口
+- 一系列`path`字段：声明具体的转发策略（这与Nginx、HAproxy的配置文件的写法是一致的）
 
-有了Ingress这样统一的抽象，kubernetes用户就无需关系Ingress的具体细节，在实际的使用中，只需要从选择一个具体的Ingress Controller，把它部署在kubernetes集群里即可。Ingress Controller根据定义的Ingress对象，提供对应的代理能力。
+有了Ingress这样统一的抽象，kubernetes用户就无需关系Ingress的具体细节，在实际的使用中，只需要选择一个具体的Ingress Controller，把它部署在kubernetes集群里即可。Ingress Controller根据定义的Ingress对象，提供对应的代理能力。
 
 > 业界常用的反向代理项目，Nginx、HAproxy、Envoy、Traefik等，都已经为kubernetes专门维护了对应Ingress Controller。
 
@@ -200,7 +202,7 @@ Events:
   ----    ------  ----  ----                      -------
   Normal  CREATE  4m    nginx-ingress-controller  Ingress default/cafe-ingress
 
-# 在Rules字段定义更多的Path来为更多的域名土工负载均衡服务
+# 在Rules字段定义更多的Path来为更多的域名提供负载均衡服务
 
 # 通过访问Ingress的地址和端口，访问部署的应用
 # 如https://cafe.example.com:443/coffee，应该是coffee这个Deployment负责响应
