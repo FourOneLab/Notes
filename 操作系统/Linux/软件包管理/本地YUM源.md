@@ -53,6 +53,8 @@ yum makecache fast
 
 ```bash
 yum install -y createrepo
+
+createrepo  /tmp/tuo  # 这里是下载好的安装包的存放路径
 ```
 
 ## 搭建HTTP服务器
@@ -62,7 +64,7 @@ yum install  -y httpd
 systemctl start httpd.service 
 systemctl enable httpd.service   
 ```
-httpd服务器的默认路径为`/var/www/html`。
+httpd服务器的默认路径为`/var/www/html`
 
 ```bash
 mkdir /var/www/html/local
