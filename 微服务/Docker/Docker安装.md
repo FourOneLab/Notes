@@ -1,5 +1,5 @@
 # 卸载旧版本
-旧版本中Docker的名字叫 ++docker++ 或者 ++docker-engine++
+旧版本中Docker的名字叫 **docker** 或者 **docker-engine**
 ```
 $ sudo apt-get remove docker docker-engine docker.io
 ```
