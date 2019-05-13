@@ -64,12 +64,7 @@ go install github.com/labstack/echo
 
 注意：在归档文件的相对目录与pkg目录之间还有一级目录，叫做**平台相关目录**。
 
-平台相关目录的名称是由build，即构建过程的：
-1. 目标操作系统
-2. 下环线
-3. 目标计算机架构的代号
-
-三部分组成。
+>平台相关目录的名称是由build(构建)过程的：目标操作系统+下划线+目标计算机架构的代号三部分组成。
 
 总之，某个工作区的src子目录下的源码文件在安装之后，一般会被放置在当前工作区的pkg子目录下对应的目录中，或者被直接放置在该工作区的bin子目录中。如下图所示：
 
@@ -128,7 +123,7 @@ go get命令会自动从一些主流的公用代码库（如GitHub）下载目�
 
 对代码包的远程导入路径进行自定义：在该代码包中的**库源码文件**的包声明语句的右侧加入导入注释，如下：
 ```go
-package somaphore // import "golang.org/x/sync/semaphore"
+package semaphore // import "golang.org/x/sync/semaphore"
 ```
 这个代码包原来的完整导入路径是`github/golang/x/sync/semaphore`，这与实际存储它的网络地址一样,该代码包的源码实际存放在GitHub网站的golang组的sync代码仓库的semaphore目录下。加入导入注释后，用以下命令即可下载并安装该代码包了：
 ```go
