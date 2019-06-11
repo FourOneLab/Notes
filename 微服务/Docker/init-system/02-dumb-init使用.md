@@ -43,5 +43,94 @@ my-other-server  # launch another process in the foreground
 
 有一点需要注意：对于作业控制信号（SIGTSTP，SIGTTIN，SIGTTOU），`dumb-init`在收到信号后总是会自动挂起，即使你把它重写为其他东西也是如此。
 
-# 在Docker 容器内安装
+# 在Docker容器内安装
+五种在容器中安装`dumb-init`的方式：
+## 方法1 ：从发行版的软件包存储库（Debian，Ubuntu等）安装
+许多主流的Linux发行版（包括Dabian从stretch版本开始）和Debian的衍生版如Ubuntu（从bionic版本开始）都已经在官方的仓库中包含了`dumb-init`安装包。
 
+基于Debian的发行版，可以运行`apt install dumb-init`来安装，就像安装其他的软件包一样。
+
+> 大多数发行版提供的`dumb-init`不是静态链接文件。一般来说，这没什么毛病，但意味着这些版本的`dumb-init`在复制到其他Linux发行版时就不能用了，这与静态链接版本不同。
+
+## 方法2：通过apt网络服务器（Debian/Ubuntu）安装
+如果有内部apt服务器，将`dumb-init`以`.deb`的格式上传到服务器然后在使用它。在Dockerfiles中，可以通过`apt install dumb-init`，它就可以使用了。
+
+>可以从GIthub的Release页面下载Debian安装包,也可以执行`nake builddeb`自行生成。
+
+## 方法3：手动安装`.deb`安装包（Debian/Ubuntu）
+如果没有apt网络服务器，可以手动执行`dpkg -i`指令来安装`.deb`安装包，可以选择两种方式将`.deb`放到容器中：
+1. 挂载一个目录
+2. 通过wget命令下载
+
+如下所示：
+```dockerfile
+RUN wget https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64.deb
+RUN dpkg -i dumb-init_*.deb
+```
+
+## 方法4：直接下载二进制包
+由于dumb-init是作为静态链接的二进制文件发布的，因此通常只需将其放入image即可。在Dockerfile中执行如下所示的操作：
+
+```dockerfile
+RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_amd64
+RUN chmod +x /usr/local/bin/dumb-init
+```
+
+## 方法5：通过PyPI安装
+虽然`dumb-init`完全用C语言编写，但还提供了一个Python包来编译和安装二进制文件。它可以使用`pip`从PyPI安装。首先安装一个C编译器（在Debian/Ubuntu上执行`apt-get install gcc`），然后执行`pip install dumb-init`。
+
+从1.2.0开始，PyPI的软件包可作为预编译的存档文件使用，无需在常见的Linux发行版上进行编译。
+
+# 使用方式
+一旦安装在Docker容器中，只需在命令前加上dumb-init（确保按照docker[推荐的JSON语法格式](./01-dumb-init简介.md)编写命令，查看附录部分）。
+
+在Dockerfile中，使用`dumb-init`作为容器的入口点是一个好习惯。“`entrypoint`”是一个局部指令，它被添加到的CMD指令之前，使其非常适合`dumb-init`：
+
+```dockerfile
+# Runs "/usr/bin/dumb-init -- /my/script --with --args"
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+
+# or if you use --rewrite or other cli flags
+# ENTRYPOINT ["dumb-init", "--rewrite", "2:3", "--"]
+
+CMD ["/my/script", "--with", "--args"]
+```
+
+如果在基础镜像中声明入口点，那么任何以它为基础的镜像都不需要再声明dumb-init。他们可以像往常一样只设置CMD。
+
+对于交互式一次性使用，可以手动添加它：
+```bash
+$ docker run my_container dumb-init python -c 'while True: pass'
+
+# 在没有dumb-init的情况下运行同样的命令将导致无法在没有SIGKILL的情况下停止容器，但是使用dumb-init，可以发送更多人性化的信号，如SIGTERM
+```
+
+对于`CMD`和`ENTRYPOINT`使用**JSON语法**非常重要。否则，Docker会调用shell来运行你的命令，从而导致shell为PID 1而不是dumb-init。
+
+## 使用shell进行预启动挂钩
+容器通常需要做一些在开始构建期间无法完成的预启动工作。例如，可能希望根据环境变量模板化一些配置文件。将它与dumb-init集成的最佳方法如下：
+
+```dockerfile
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["bash", "-c", "do-some-pre-start-thing && exec my-server"]
+```
+通过仍然使用dumb-init作为入口点，你可以始终拥有适当的init系统。
+
+bash命令的exec部分很重要，因为它将bash进程替换为你的服务，因此shell仅在启动时暂时存在。
+
+# 编译 dumb-init
+构建dumb-init二进制文件需要一个有效的编译器和libc头文件，默认为glibc。
+```bash
+$ make
+```
+## 通过musl编译
+由于glibc，静态编译的dumb-init超过700KB，现在musl是一个可选选项。在Debian/Ubuntu apt-get install musl-tools上安装源代码和包装器，然后只需：
+```bash
+$ CC=musl-gcc make
+```
+当用musl静态编译时，二进制大小约为20KB。
+
+## 编译Debian安装包
+我们使用标准的Debian约束来指定编译依赖关系（查看debian/control）。一个简单的入门方法是`apt-get install build-essential devscripts equivs`，然后`sudo mk-build-deps -i --remove`自动安装所有缺少的编译依赖项。然后，可以使用`make builddeb`来编译dumb-init Debian软件包。
+
+如果你更喜欢使用Docker自动编译Debian软件包，只需运行`make builddeb-docker`即可。这更容易，但要求在计算机上运行Docker。
