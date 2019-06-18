@@ -4,15 +4,15 @@
 1. 从集群所有的节点中，根据调度算法挑选出所有可以运行该Pod的节点
 2. 在上一步的结果中，在根据调度算法挑选一个最符合条件的节点作为最终结果
 
-> kubernetes发展的主旋律是整个开源项目的“民主化“，是组件的轻量化、接口化、插件化。所有有了CRI、CNI、CSI、CRD、Aggregated APIServer、Initializer、Device Plugin等各个层级的可扩展能力，默认段哦度，却是kubernetes项目里最后一个没有对外暴露出良好定义过的、可扩展接口的组件。
+> kubernetes发展的主旋律是整个开源项目的“民主化“，是组件的轻量化、接口化、插件化。所以有了CRI、CNI、CSI、CRD、Aggregated APIServer、Initializer、Device Plugin等各个层级的可扩展能力，**默认调度器**，却是kubernetes项目里最后一个没有对外暴露出良好的、定义过的、可扩展接口的组件。
 
 # 原理
-具体的调度流程中，
-1. 默认调度器会首先调用一组叫作**Predicate**的调度算法，来检查每个Node
-2. 再调用一组**Priority**的调度算法，来给上一步得到的结果里的每个Node打分
-3. 最终的调度结果，就是得分做高的那个Node
+默认调度器的具体的调度流程：
+1. 检查Node（调用**Predicate**算法）
+2. 给Node打分（调用**Priority**算法）
+3. 最高分Node（调度结果）
 
-> 调度器对一个Pod调度成功,实际上就是将它的`spec.nodeName`字段填上调度结果的节点名字。
+> 调度器对一个Pod调度成功,实际上就是将它的`spec.nodeName`字段填上调度结果的Node名字。
 
 上述调度机制的工作原理如下图所示：
 
@@ -21,7 +21,7 @@
 **kubernetes的调度器的核心，实际上就是两个相互独立的控制循环**。
 
 ## Informer Path
-主要目的是启动一些列Informer，用来监听（WATCH）Etcd中Pod、Node、Service等与调度相关的API对象的变化。
+主要目的是启动一系列Informer，用来监听（WATCH）Etcd中Pod、Node、Service等与调度相关的API对象的变化。
 
 > 比如，当一个待调度Pod（即它的nodeName字段为空）被创建出来后，调度器就会通过Pod Informer的Handler将这个待调度Pod添加进调度队列。
 
@@ -29,22 +29,23 @@
 
 ## Scheduling Path
 调度器负责Pod调度的主循环，主要逻辑就是：
-1. 不断地从调度队列里出队一个Pod
-2. 调用Predicate算法进行过滤，过滤得到的是一组Node（所有可以运行这个Pod的宿主机列表）
+1. 从调度队列里出队一个Pod
+2. 调用Predicate算法进行过滤，得到一组Node（所有可以运行这个Pod的宿主机列表）
 > Predicate算法需要的Node信息，都是从Scheduler Cache里直接拿到的，这是调度器保证算法执行效率的主要手段之一。
-3. 调度器再调用Priority算法为上述列表里的Node打分，分数从0到10，得分最高的Node就会作为这次调度的结果
-4. 调度算法执行完成后，调度器就需要将Pod对象的nodeName字段的值，修改为上述Node的名字（这一步称为Bind）
-> 为了不在关键调度路径里远程访问APIServer，kubernetes的默认调度器在Bind阶段，只会根系Scheduler Cache里的Pod和Node信息（这种基于乐观假设的API对象更新方式，称为Assume）。
-5. Assume之后，调度器会创建一个Goroutine来异步地向APIServer发起更新Pod的请求，来真正完成Bind操作。
+3. 调度器再调用Priority算法为上述列表里的Node打分，分数从0到10，得分最高的Node作为这次调度的结果
+4. 调度算法执行完成后，调度器就需要将Pod对象的nodeName字段的值，修改为上述Node的名字（称为Bind）
+> 为了不在关键调度路径里远程访问APIServer，kubernetes的默认调度器在Bind阶段，只会根据Scheduler Cache里的Pod和Node信息（这种基于乐观假设的API对象更新方式，称为Assume）。
+5. Assume之后，调度器会创建一个Goroutine来异步地向APIServer发起更新Pod的请求，来真正完成Bind操作
 > 如果这次异步的Bind过程失败了，其实也没有太大关系，等Scheduler Cache同步之后一切就会恢复正常。
-6. 正是由于上述kubernetes调度器的乐观绑定设计，当一个新的Pod完成调度需要在某个节点上运行起来之前，该节点上的kubelet会进行Admit操作，来再次验证给Pod是否确实能够运行在该节点上
-> Admit操作实际上就是把一组称为GeneralPredicates的最基本的调度算法，比如：资源是否可用。端口是否冲突等在执行一遍，作为kubelet端的二次确认。
+6. 由于调度器的乐观绑定设计，当一个新的Pod完成调度需要在某个节点上运行起来之前，该节点上的kubelet会进行Admit操作，来再次验证该Pod是否能够运行在该节点上
+> Admit操作实际上就是把一组称为GeneralPredicates的最基本的调度算法，比如：资源是否可用、端口是否冲突等在执行一遍，作为kubelet端的二次确认。
 
 ### 无锁化
-除了上述过程中的**Cache化*和“乐观绑定*，kubernetes默认调度器还有一个重要的设计：**无锁化**。在Scheduling Path 上:
+除了上述过程中的**Cache化和乐观绑定**，默认调度器还有一个重要的设计：**无锁化**。在Scheduling Path 上:
 1. 调度器会启动多个Goroutine以节点为粒度并发执行Predicates算法，从而提高这一阶段的执行效率
 2. Priorities算法也会以MapReduce的方式并行计算然后再进行汇总
-**在这个所有需要并发的路径上，调度器会避免设置任何全局的竞争资源。从而避免去使用锁进行同步带来的巨大的性能损耗**。
+
+**在这个需要并发的路径上，调度器会避免设置任何全局的竞争资源。从而避免去使用锁进行同步带来的巨大的性能损耗**。
 
 > 所以，kubernetes调度器只有对调度队列和Scheduler Cache进行操作时，才需要加锁，而这两部分操作，都不在Scheduling Path的算法执行路径上。
 
