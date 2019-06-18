@@ -108,7 +108,7 @@ RUN /bin/bash -c 'source $HOME/.bashrc; echo $HOME'
 
 > **注意**：要使用除`/bin/sh`之外的其他shell，请传入所需shell的exec形式。
 > 
-> 例如`RUN ["/bin/bash","-c","echo hello"]`
+> 例如`RUN ["/bin/bash", "-c", "echo hello"]`
 
 
 在下一次构建期间，RUN指令的缓存不会自动失效。像`RUN apt-get dist-upgrade -y`这样的指令的缓存将在下一次构建期间重用。可以使用`--no-cache`标志使RUN指令的高速缓存无效，例如`docker build --no-cache`。
@@ -133,10 +133,10 @@ RUN ["C:\\windows\\system32\\tasklist.exe"]
 与shell形式不同，exec形式不会调用命令shell。这意味着不会发生正常的shell处理。例如:
 ```bash
 # 不会对`$HOME`执行变量替换
-RUN ["echo","$HOME"]
+RUN ["echo", "$HOME"]
 
 # 想要shell处理，要么使用shell形式(上一节)，要么直接执行shell
-RUN ["sh","-c","echo $HOME"]
+RUN ["sh", "-c", "echo $HOME"]
 
 # 当使用exec形式执行shell时（如shell形式的情况），它是shell执行环境变量扩展而不是docker执行
 ```

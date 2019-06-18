@@ -22,12 +22,12 @@ dumb-init是一个简单的进程管理器和init系统，设计用于在最小�
 # dumb-init能做什么
 `dumb-init`作为`PID 1`运行，就像一个简单的init系统。它启动一个进程，然后将所有收到的信号代理到以该子进程为根的会话。
 
-由于你的进程不再是`PID 1`，当它从`dumb-init`接收信号时，将应用默认的信号处理程序，并且你的进程将按照预期运行。如果你的进程死了，`dumb-init`也会死掉，注意清理可能仍然存在的任何其他进程。
+由于你的进程不再是`PID 1`，当它从`dumb-init`接收信号时，将应用默认的信号处理程序，并且你的进程将按照预期运行。如果你的进程死了，`dumb-init`也会死掉，逐一清理仍然存在的任何其他进程。
 
 ## 会话行为
-在默认模式下，`dumb-init`建立以子进程为根的会话，并将信号发送到整个进程组。如果你有一个表现不佳的子进程（比如一个shell脚本），这个子进程在死亡前通常不会给它的子进程发出信号，这很有用。
+在默认模式下，`dumb-init`建立以子进程为根的会话，并将信号发送到整个进程组。如果你有一个表现不佳的子进程（比如一个shell脚本），这个子进程在死亡前通常不会给它的子进程发出信号。
 
-这实际上可以在常规进程监视器（如daemontools或supervisord）中的Docker容器之外用于监视shell脚本。通常，shell接收到的`SIGTERM`之类的信号不会转发给它的子进程;相反，只有shell进程死掉才会发送信号。如果使用`dumb-init`，你可以在`shebang`中使用`dumb-init`编写shell脚本：
+这实际上可以在常规进程监视器（如daemontools或supervisord）中的Docker容器之外用于监视shell脚本。通常，shell接收到的`SIGTERM`之类的信号不会转发给它的子进程；只有shell进程死掉才会发送信号。如果使用`dumb-init`，你可以在`Shebang`中使用`dumb-init`编写shell脚本：
 
 ```bash
 #!/usr/bin/dumb-init /bin/sh
@@ -37,13 +37,13 @@ my-other-server  # launch another process in the foreground
 
 通常，发送到shell的`SIGTERM`会杀死shell，但这些进程仍然会处于运行状态（不论是后台还是前台进程）。使用`dumb-init`，你的子进程将收到与shell所执行的相同的信号。
 
-如果你希望仅将信号发送到直接子进程，则可以使用`--single-child`参数运行，或者在运行`dumb-init`时设置环境变量`DUMB_INIT_SETSID = 0`。在这种模式下，`dumb-init`完全透明;你甚至可以把多个串起来（比如`dumb-init dumb-init echo'oh，hi'`）。
+如果你希望仅将信号发送到直接子进程，则可以使用`--single-child`参数运行，或者在运行`dumb-init`时设置环境变量`DUMB_INIT_SETSID = 0`。在这种模式下，`dumb-init`完全透明；甚至可以把多个串起来（比如`dumb-init dumb-init echo 'oh,hi'`）。
 
 
 ## 信号重写
-`dumb-init`允许在代理它们之前重写输入信号。这在始终发送标准信号（例如SIGTERM）的Docker 容器管理程序（如Mesos或Kubernetes）中非常有用。某些应用程序需要不同的停止信号才能进行优雅的清理退出。
+`dumb-init`允许在代理进程之前重写输入信号。这在始终发送标准信号（例如SIGTERM）的Docker 容器管理程序（如Mesos或Kubernetes）中非常有用。
 
-> 例如，要将信号SIGTERM（编号15）重写为SIGQUIT（编号3），只需在命令行中添加`--rewrite 15：3`即可。要完全丢弃信号，可以将其重写为特殊数字0。
+> 某些应用程序需要不同的停止信号才能进行优雅的清理退出。例如，要将信号SIGTERM（编号15）重写为SIGQUIT（编号3），只需在命令行中添加`--rewrite 15:3`即可。要完全丢弃信号，可以将其重写为特殊数字0。
 
 ### 信号重写特例
 在`setsid`模式下运行时，在大多数情况下转发`SIGTSTP/SIGTTIN/SIGTTOU`是不够的，因为，如果进程没有为这些信号添加自定义信号处理器，内核将不会应用默认信号处理行为（这将暂停进程），因为它是孤儿进程组的成员。因此，将这三个信号的默认重写设置为`SIGSTOP`。如果需要，可以通过将信号重写回原始值来选择不使用此行为。
