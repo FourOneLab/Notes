@@ -249,7 +249,7 @@ func (c *Controller) run() {
  }, cache.Indexers{})
  
  ctx := context.TODO()
- // TODO: use workqueue to avoid blocking
+ // use workqueue to avoid blocking
  informer.Run(ctx.Done())
 }
 ```
