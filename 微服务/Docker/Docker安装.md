@@ -1,57 +1,64 @@
 # 卸载旧版本
+
 旧版本中Docker的名字叫 **docker** 或者 **docker-engine**
-```
-$ sudo apt-get remove docker docker-engine docker.io
+
+```bash
+sudo apt-get remove docker docker-engine docker.io
 ```
 
 /var/lib/docker 目录中的内容包括：
+
 1. images
 2. containers
 3. volumes
 4. networks
 
-
 新版的Docker CE名字叫 docker-ce。
 
 # 存储驱动
+
 在Ubuntu下，Docker CE 支持overlay2和aufs。
 
 - Linux kernel 4 以上版本overlay2比aufs更好。
 - Linux kernel 3 版本只有aufs，overlay和overlay2不支持这个内核。
 
-
 # 安装新版本
+
 1. 下载Docker的存储仓库，然后进行下载安装，这样也便于卸载和升级。（推荐方式）
 2. 在脱机离线的环境下，下载Deb安装包，手动安装和配置
 3. 在测试或者开发环境中使用自动化脚本安装
 
 ## 以Docker存储仓库的形式安装
+
 ### 配置存储仓库
+
 1. 更新apt安装包的索引信息
 
-```
+```bash
 $ sudo apt-get update
 ```
+
 2. 安装必要的工具使得apt能够通过HTTPS来使用存储仓库
 
+```bash
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
 ```
-$ sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
-```
+
 3. 添加Docker官方的GPG 密钥
 
-```
+```bash
 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
 
 或者从阿里云开源镜像仓库下载GPG和密钥
 
-```
+```bash
 curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 ```
 
 通过搜索指纹的最后8个字符，确认现在拥有指纹9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88的密钥。
 
-```
+```bash
 $ sudo apt-key fingerprint 0EBFCD88
 
 pub   4096R/0EBFCD88 2017-02-22
@@ -59,9 +66,10 @@ pub   4096R/0EBFCD88 2017-02-22
 uid                  Docker Release (CE deb) <docker@docker.com>
 sub   4096R/F273FCD8 2017-02-22
 ```
+
 4. 设置稳定版存储仓库
 
-```
+```bash
 $ sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
@@ -73,46 +81,49 @@ $ sudo add-apt-repository \
 使用阿里云这里也需要修改
 
 
-```
+```bash
 sudo add-apt-repository "deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 ```
 
 > lsb_release -cs 命令会获取Ubuntu的发行版代号，如果使用的是一些子发行版（如Linux Mint Rafaela，需要将这个命令的返回值修改为trusty，即对应的父发行版代号）
 
 ### 安装Docker ce
+
 1. 更新apt安装包的索引信息
 
+```bash
+sudo apt-get update
 ```
-$ sudo apt-get update
-```
+
 2. 安装最新版的docker-ce
 
-```
-$ sudo apt-get install docker-ce
+```bash
+sudo apt-get install docker-ce
 ```
 apt-get install  和  apt-get update 通常安装和升级最新版。
 
 3. 安装指定版本的docker-ce
 
-```
-$ apt-cache madison docker-ce   //列出存储仓库中所有版本
+```bash
+apt-cache madison docker-ce   //列出存储仓库中所有版本
 
 docker-ce | 18.09.0~ce-0~ubuntu | https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
 
-$ sudo apt-get install docker-ce=<VERSION>  //使用全名安装对应版本
+sudo apt-get install docker-ce=<VERSION>  //使用全名安装对应版本
 ```
 
 Docker daemon会自动运行。
 
 4. 验证docker-ce是否安装成功
 
-```
-$ sudo docker run hello-world
+```bash
+sudo docker run hello-world
 ```
 
 安装完成后，docker组被创建但是其中并没有用户，所以需要使用sudo来运行docker的命令
 
 ### 以非root用户管理Docker
+
 Docker 守护进程绑定在Unix套接字而不是TCP端口。默认情况下，Unix套接字由用户root拥有，而其他用户只能使用sudo访问它。Docker守护程序始终以root用户身份运行。
 
 如果不想在docker命令前加上sudo，请创建一个名为docker的Unix组并向其添加用户。当Docker守护程序启动时，它会创建一个可由docker组成员访问的Unix套接字。
