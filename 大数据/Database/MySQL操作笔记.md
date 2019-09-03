@@ -97,7 +97,6 @@ SELECT * FROM information_schema.INNODB_LOCK_waits;
 kill id
 ```
 
-
 # 修改数据库编码方式
 
 ```sql
