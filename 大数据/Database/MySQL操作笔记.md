@@ -114,7 +114,9 @@ SET character_set_results = utf8;
 SET character_set_server = utf8;
 ```
 
-## 修改Innodb pool配置
+## 性能调优
+
+修改Innodb pool配置
 
 ```sql
 --- 查看相关配置
@@ -132,3 +134,23 @@ select 60*1024*1024*1024;
 --- 在线修改配置
 set global innodb_buffer_pool_size = 64424509440;
 ```
+
+2、expire_logs_days=7
+
+太短，只能保留7天的binlog，只能恢复7天内的任意数据。建议设置为参数文件里被覆盖的90天的设置。
+
+3、long_query_time=10
+
+太长，建议设置为2秒，让慢查询日志记录更多的慢查询。
+
+4、transaction-isolation = read-committed
+
+建议注释掉，使用数据库默认的事务隔离级别
+
+5、innodb_lock_wait_timeout = 5
+
+设置得太小，会导致事务因锁等待超过5秒，就被回滚。建议和云门户设置得保持一致，云门户大小为120。
+
+6、autocommit = 0
+
+建议改为mysql默认的自动提交(autocommit=1)，提升性能，方便日常操作。
