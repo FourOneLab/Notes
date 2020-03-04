@@ -1,1 +1,0 @@
-![k8s-api组](./images/k8s-api组.jpg)
