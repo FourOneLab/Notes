@@ -126,7 +126,11 @@ show variables like '%innodb_buffer%';
 show status where Variable_name like 'InnoDB_buffer_pool%';
 
 --- 显示resize状态
-Innodb_buffer_pool_resize_status:Completed resizing buffer pool at 200216  9:42:56.
++---------------------------------------+----------------------------------------------------+
+| Variable_name                         | Value                                              |
++---------------------------------------+----------------------------------------------------+
+|Innodb_buffer_pool_resize_status       | Completed resizing buffer pool at 200216  9:42:56. |
++---------------------------------------+----------------------------------------------------+
 
 --- 计算具体指
 select 60*1024*1024*1024;
@@ -135,22 +139,10 @@ select 60*1024*1024*1024;
 set global innodb_buffer_pool_size = 64424509440;
 ```
 
-2、expire_logs_days=7
-
-太短，只能保留7天的binlog，只能恢复7天内的任意数据。建议设置为参数文件里被覆盖的90天的设置。
-
-3、long_query_time=10
-
-太长，建议设置为2秒，让慢查询日志记录更多的慢查询。
-
-4、transaction-isolation = read-committed
-
-建议注释掉，使用数据库默认的事务隔离级别
-
-5、innodb_lock_wait_timeout = 5
-
-设置得太小，会导致事务因锁等待超过5秒，就被回滚。建议和云门户设置得保持一致，云门户大小为120。
-
-6、autocommit = 0
-
-建议改为mysql默认的自动提交(autocommit=1)，提升性能，方便日常操作。
+|参数|描述|
+|---|---|
+|expire_logs_days=7|太短，只能保留7天的binlog，只能恢复7天内的任意数据。建议设置为参数文件里被覆盖的90天的设置|
+|long_query_time=10|太长，建议设置为2秒，让慢查询日志记录更多的慢查询|
+|transaction-isolation = read-committed|建议注释掉，使用数据库默认的事务隔离级别|
+|innodb_lock_wait_timeout = 5|设置得太小，会导致事务因锁等待超过5秒，就被回滚。建议大小为120|
+|autocommit = 0|建议改为mysql默认的自动提交(autocommit=1)，提升性能，方便日常操作|
